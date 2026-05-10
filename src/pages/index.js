@@ -426,7 +426,7 @@ export default function Home() {
         <div className="max-w-3xl mx-auto">
           <div className="mb-10 sm:mb-16">
             <span className="font-['DM_Sans'] text-xs tracking-[0.3em] uppercase text-violet-400 mb-3 block">02 — Experience</span>
-            <h2 className="font-['Syne'] font-extrabold text-4xl sm:text-5xl md:text-6xl text-white">Where I've worked</h2>
+            <h2 className="font-['Syne'] font-extrabold text-4xl sm:text-5xl md:text-6xl text-white">Where I&apos;ve worked</h2>
           </div>
  
           {/* Timeline */}
