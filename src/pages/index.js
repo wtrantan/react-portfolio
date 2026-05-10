@@ -1,152 +1,541 @@
 import Head from 'next/head'
-import {BsFillMoonStarsFill, BsTextCenter} from 'react-icons/bs';
-import {AiFillLinkedin, AiFillTwitterCircle, AiFillYoutube, AiFillGithub, AiFillInstagram } from 'react-icons/ai';
-import { Parallax, ParallaxLayer } from '@react-spring/parallax'
-import { useState } from "react";
-import * as Scroll from 'react-scroll';
-import { Link, Button, Element, Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll'
-import { RSC_MODULE_TYPES } from 'next/dist/shared/lib/constants';
+import { AiFillLinkedin, AiFillGithub, AiFillInstagram } from 'react-icons/ai';
+import { useState, useEffect, useRef } from "react";
+import { Link } from 'react-scroll';
 
 export default function Home() {
-  const [darkMode, setDarkMode] = useState(false);
-  
-  //background
+  const [activeSection, setActiveSection] = useState('home');
+  const [mousePos, setMousePos] = useState({ x: -999, y: -999 });
+  const canvasRef = useRef(null);
 
-   /*
-    let stars = document.getElementById('stars');
-    let mountains_front = document.getElementById('mountains_front')
- 
-    window.addEventListener('scroll', function()){
-    
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const particles = Array.from({ length: 70 }, () => ({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      r: Math.random() * 1.5 + 0.3,
+      dx: (Math.random() - 0.5) * 0.3,
+      dy: (Math.random() - 0.5) * 0.3,
+      opacity: Math.random() * 0.6 + 0.2,
+    }));
+
+    let animId;
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach(p => {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(167, 139, 250, ${p.opacity})`;
+        ctx.fill();
+        p.x += p.dx; p.y += p.dy;
+        if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
+        if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
+      });
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const dist = Math.hypot(particles[i].x - particles[j].x, particles[i].y - particles[j].y);
+          if (dist < 120) {
+            ctx.beginPath();
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.strokeStyle = `rgba(167, 139, 250, ${0.08 * (1 - dist / 120)})`;
+            ctx.lineWidth = 0.5;
+            ctx.stroke();
+          }
+        }
+      }
+      animId = requestAnimationFrame(draw);
     }
-*/
+    draw();
+
+    const resize = () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; };
+    window.addEventListener('resize', resize);
+    return () => { cancelAnimationFrame(animId); window.removeEventListener('resize', resize); };
+  }, []);
+
+  useEffect(() => {
+    const handleMouse = (e) => setMousePos({ x: e.clientX, y: e.clientY });
+    window.addEventListener('mousemove', handleMouse);
+    return () => window.removeEventListener('mousemove', handleMouse);
+  }, []);
+
+  const skills = [
+    { name: 'JavaScript', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg' },
+    { name: 'TypeScript', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg' },
+    { name: 'Python',     icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg' },
+    { name: 'SQL',        icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg' },
+    { name: 'SQLite',     icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sqlite/sqlite-original.svg' },
+    { name: 'Flask',      icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flask/flask-original.svg' },
+    { name: 'Git',        icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg' },
+    { name: 'React',      icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg' },
+    { name: 'Node.js',    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg' },
+    { name: 'Express',    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg' },
+    { name: 'Next.js',    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg' },
+    { name: 'C++',        icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg' },
+    { name: 'C',          icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg' },
+    { name: 'RESTful API', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg' },
+    { name: 'Bootstrap',  icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg' },
+    { name: 'Tailwind',   icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg' },
+    { name: 'Material UI', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/materialui/materialui-original.svg' },
+    { name: 'Three.js',   icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/threejs/threejs-original.svg' },
+    { name: 'Docker',     icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg' },
+    { name: 'HTML',       icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg' },
+    { name: 'CSS',        icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg' },
+    { name: 'MongoDB',    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg' },
+    { name: 'Java',       icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg' },
+    { name: 'Dart',       icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dart/dart-original.svg' },
+    { name: 'Flutter',    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg' },
+    { name: 'Arduino',    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/arduino/arduino-original.svg' },
+    { name: 'Firebase',   icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg' },
+    { name: 'Godot',      icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/godot/godot-plain.svg' },
+  ];
+
+
+  const experience = [
+    {
+      company: 'CITRIS and the Banatao Institute',
+      role: 'Full-Stack Developer Intern',
+      period: 'May 2025 – Aug 2025',
+      location: 'Remote',
+      color: 'from-violet-600 to-indigo-500',
+      bullets: [
+        'Developing a media web platform with Tiny Health Tales and tooling for creation of health flyers.',
+        'Designing accessible UI/UX and MERN stack for efficient storage of media.',
+        'Participating in CITRIS workshops focused on professional skills, tech innovation, and public-interest technology.',
+      ],
+    },
+    {
+      company: 'X10e',
+      role: 'Full-Stack Developer Intern – LLM Model for Health Data',
+      period: 'Jan 2025 – May 2025',
+      location: 'Remote',
+      color: 'from-fuchsia-600 to-pink-500',
+      bullets: [
+        'Developed an AI-powered mobile health assistant integrating simulated biosensor data with a LLM.',
+        'Built a retrieval-augmented generation (RAG) pipeline using AWS to analyze biomarkers from 20+ research papers.',
+        'Delivered a cross-platform Flutter app with real-time health data visualization and multi-device support.',
+      ],
+    },
+    {
+      company: 'Tiny Health Tales',
+      role: 'Frontend Web Developer',
+      period: 'Dec 2023 – Aug 2024',
+      location: 'Remote',
+      color: 'from-cyan-600 to-blue-500',
+      bullets: [
+        'Designed and developed a responsive website from scratch using React and TypeScript for health education outreach.',
+        'Produced user-friendly interfaces reaching ~40 users in the San Joaquin Valley.',
+        'Collaborated with team members to prepare the platform for future media integration.',
+      ],
+    },
+    {
+      company: 'Igniteducation',
+      role: 'Frontend & Mobile Web Developer Intern',
+      period: 'Nov 2020 – Jul 2021',
+      location: 'Remote',
+      color: 'from-emerald-600 to-teal-500',
+      bullets: [
+        'Redesigned the company website using HTML, CSS, Bootstrap, and WordPress, improving mobile responsiveness by 30%.',
+        'Enhanced mobile accessibility by adjusting visual elements for smaller screens.',
+        'Utilized Photoshop to redesign logos and enhance visual consistency across pages.',
+      ],
+    },
+  ];
+  const projects = [
+  {
+    title: 'Portfolio Website',
+    description: 'Personal portfolio built with Next.js, React, and Tailwind CSS featuring animated UI and smooth scroll navigation.',
+    tags: ['React', 'Next.js', 'Tailwind'],
+    color: 'from-violet-600 to-indigo-600',
+    image: '/projects/portfolio.png',
+    link: 'https://github.com/wtrantan/react-portfolio',
+  },
+  {
+    title: 'KarimeRank',
+    description: 'A responsive K-pop idol card ranking application powered by an Elo system. Features interactive visual effects and robust data integration capable of handling approximately 10,000 daily high-volume API requests.',
+    tags: [
+    'React', 
+    'Node.js', 
+    'Express.js', 
+    'MongoDB', 
+    'Firebase', 
+    'Tailwind CSS', 
+    'JSON Web Token', 
+    'Cheerio', 
+    'Puppeteer',
+    'JavaScript',
+    'API Integration',
+    'UI/UX'
+  ],
+    color: 'from-fuchsia-600 to-pink-600',
+    image: '/projects/Cover.png',
+    link: 'https://karime-rank.vercel.app/',
+  },
+  {
+    title: 'Chat & Chill',
+    description: 'A winter-themed multiplayer web game featuring real-time chat, snowball mechanics, and rarity-based fishing within randomly generated shared lobbies, seamlessly supporting up to 8 concurrent players.',
+    tags: ['Socket.IO', 'Express.js', 'SQLite', 'WebSockets'],
+    color: 'from-cyan-600 to-blue-600',
+    image: '/projects/penguin.png',
+    link: 'https://cse108-project-shooter-game.onrender.com/',
+  },
+   {
+    title: 'KarinaSys',
+    description: 'An introductory exploration of 3D web development with Three.js, demonstrating the fundamentals of manipulating geometries, lighting, and camera perspectives within a digital space.',
+    tags: ['Three.js'],
+    color: 'from-emerald-400 to-teal-600',
+    image: '/projects/karinasys.png',
+    link: 'https://karinasys.vercel.app/',
+  },
+   {
+    title: 'Cauldron Creates',
+    description: 'A full-stack recipe generation application that utilizes AI to instantly brew healthy, step-by-step meals based on whatever ingredients users currently have on hand. Designed to reduce food waste and streamline meal prep, it features calorie tracking and a personalized digital cookbook for saving favorite dishes.',
+    tags: ['React', 'Node.js', 'Express.js','MySQL', 'openAI API'],
+    color: 'from-indigo-300 to-purple-400',
+    image: '/projects/cauldron.png',
+    link: 'https://github.com/wtrantan/HackDavis',
+  },
+  {
+    title: 'Profit Prophet',
+    description: 'An AI-powered personal finance assistant that integrates secure banking data to analyze transactions and deliver personalized budgeting advice. Features an intelligent, real-time chatbot designed to empower users with smarter saving strategies and actionable financial clarity.',
+    tags: ['React', 'Node.js','Express.js', 'MongoDB', 'Gemini API'],
+    color: 'from-orange-400 to-rose-500',
+    image: '/projects/profit.jpg',
+    link: 'https://github.com/wtrantan/HackDavis',
+  },
+  
+];
+
   return (
-    <div>
+    <div className="bg-[#07050f] text-white font-sans overflow-x-hidden w-full">
       <Head>
-        <title>William Trantan Portfolio</title>
-        <meta name="description" content="Generated by create next app" />
+        <title>William Trantan — Portfolio</title>
+        <meta name="description" content="William Trantan — CS Student & Developer" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
+        <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
       </Head>
-      <main  className=" bg-gradient-to-r from-indigo-900 to-gray-900 " >
-           
-        <section className="home scroll-smooth min-h-screen bg-stars1 bg-fixed items-center bg-no-repeat bg-cover bg-size ">
-       <div className="bg-mount2 bg-fixed bg-bottom"> 
-        
-          <div className=" min-h-screen bg-mount1 items-center bg-no-repeat bg-cover ">
-          <nav className="flex text-white">
-            <h1 className="font-burtons text-xl">My Portfolio Website</h1>
-            <ul className="  flex items-center top-0 right-0 fixed m-10">
 
-            <li className=" group"><Link to="home" spy={true} smooth={true} offset={0} duration={700} className="transition ease-in-out
-               group-hover:scale-110 delay-75 bg-gray-800
-               text-white px-6 py-2 border-none rounded-2xl ml-8">Home</Link></li>
-             
-                <li className="group "><Link to="about" spy={true} smooth={true} offset={0} duration={700} className="transition ease-in-out
-               group-hover:scale-110 delay-75 bg-gray-800
-               text-white px-6 py-2 border-none rounded-2xl ml-6">About</Link></li>
-              <li className="group"><Link to="projects" spy={true} smooth={true} offset={0} duration={700} className=" transition ease-in-out
-               group-hover:scale-110 delay-75 bg-gray-800
-               text-white px-6 py-2 border-none rounded-2xl ml-8">Projects</Link></li>
-             
-             
-            </ul>
-          </nav>
+      {/* Cursor glow — desktop only */}
+      <div
+        className="fixed pointer-events-none z-50 w-64 h-64 rounded-full hidden md:block"
+        style={{
+          left: mousePos.x - 128,
+          top: mousePos.y - 128,
+          background: 'radial-gradient(circle, rgba(139,92,246,0.08) 0%, transparent 70%)',
+          willChange: 'left, top',
+        }}
+      />
 
-          <div className="text-center py-10">
-          
-            <h2 className=" transition ease-in-out duration-300 sm:text-2xl text-2xl py-2 font-medium text-purple-300 md:text-5xl">
-              William Trantan
-            </h2>
-            
-           
-            <h3 className=" py-2 sm:text-lg text-lg text-white md:text-3xl">
-              University of California, Merced Student
-            </h3>
-            
-           
-            <p className="text-sm sm:text-sm py-5 leading-8 text-gray-200 max-w-xl mx-auto md:text-xl">
-            Welcome to my portfolio website! This site is where I will showcase my projects and everything about me. I built this website using react!
-            </p>
-            
-              <div className="text-5xl flex justify-center gap-16 py-3 text-gray-400">
-                <div className="relative group">
-                  <div className="absolute transition ease-in-out delay-75  group-hover:bg-gradient-to-r from-orange-300 to-purple-400 group-hover:scale-110 inset-0 rounded-3xl blur"></div>
-                  <a href="https://github.com/wtrantan" target="_blank"><AiFillGithub className="relative transition ease-in-out delay-75  group-hover:scale-110 group-hover:text-gray-200"/></a>
+      {/* Particle canvas */}
+      <canvas ref={canvasRef} className="fixed inset-0 z-0 pointer-events-none" />
+
+      {/* ── NAV ── */}
+      <nav className="fixed top-0 left-0 right-0 z-40 flex items-center justify-between px-4 sm:px-8 py-4"
+        style={{ background: 'rgba(7,5,15,0.85)', backdropFilter: 'blur(16px)', borderBottom: '1px solid rgba(139,92,246,0.08)' }}>
+        <span className="font-['Syne'] font-extrabold text-lg tracking-widest text-violet-300 uppercase">WT</span>
+        <ul className="flex gap-1 sm:gap-2">
+          {['Home', 'About', 'Experience', 'Projects'].map(item => (
+            <li key={item}>
+              <Link
+                to={item.toLowerCase()}
+                spy smooth offset={-72} duration={700}
+                onSetActive={() => setActiveSection(item.toLowerCase())}
+                className={`cursor-pointer px-3 sm:px-5 py-2 rounded-full font-['DM_Sans'] text-xs sm:text-sm font-medium transition-all duration-300
+                  ${activeSection === item.toLowerCase()
+                    ? 'bg-violet-600 text-white shadow-lg shadow-violet-500/30'
+                    : 'text-gray-400 hover:text-white hover:bg-white/5'}`}
+              >
+                {item}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </nav>
+
+      {/* ── HERO ── */}
+      <section id="home" name="home" className="relative min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 pt-24 pb-16 w-full box-border">
+        <div className="absolute top-1/4 left-1/4 w-64 sm:w-96 h-64 sm:h-96 rounded-full opacity-20 blur-3xl pointer-events-none"
+          style={{ background: 'radial-gradient(circle, #7c3aed, transparent)' }} />
+        <div className="absolute bottom-1/3 right-1/4 w-56 sm:w-80 h-56 sm:h-80 rounded-full opacity-15 blur-3xl pointer-events-none"
+          style={{ background: 'radial-gradient(circle, #4f46e5, transparent)' }} />
+ 
+        <div className="relative z-10 text-center w-full max-w-3xl mx-auto px-4">
+          {/* Avatar */}
+          <div className="relative inline-block mb-8">
+            <div className="w-28 h-28 sm:w-36 sm:h-36 md:w-44 md:h-44 rounded-full mx-auto overflow-hidden ring-4 ring-violet-500/40 shadow-2xl shadow-violet-500/20"
+              style={{ background: 'linear-gradient(135deg, #7c3aed, #4f46e5)' }}>
+              <img src="/pfp.png" alt="William Trantan" className="w-full h-full object-cover" />
+            </div>
+            <span className="absolute bottom-1 right-1 w-3.5 h-3.5 sm:w-4 sm:h-4 bg-emerald-400 rounded-full border-2 border-[#07050f] shadow-lg shadow-emerald-400/50" />
+          </div>
+ 
+          {/* Badge */}
+          <div className="inline-flex items-center gap-2 bg-violet-950/60 border border-violet-500/30 text-violet-300 text-[10px] sm:text-xs font-['DM_Sans'] tracking-widest uppercase px-3 sm:px-4 py-1.5 sm:py-2 rounded-full mb-5 sm:mb-6">
+            <span className="w-1.5 h-1.5 bg-violet-400 rounded-full animate-pulse shrink-0" />
+            Test Engineer · UC Merced '25
+          </div>
+ 
+          <h1 className="font-['Syne'] font-extrabold text-5xl sm:text-6xl md:text-7xl lg:text-8xl leading-none mb-5 sm:mb-6 pb-2"
+            style={{ background: 'linear-gradient(135deg, #fff 0%, #a78bfa 60%, #818cf8 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
+            William<br />Trantan
+          </h1>
+ 
+          <p className="font-['DM_Sans'] font-light text-gray-400 text-sm sm:text-base md:text-lg max-w-sm sm:max-w-md mx-auto mb-7 sm:mb-8 leading-relaxed">
+            Computer Science student building polished digital experiences.
+            Passionate about code, hockey, and everything in between.
+          </p>
+ 
+          {/* Social links */}
+          <div className="flex justify-center gap-2 sm:gap-3 mb-7 sm:mb-8 flex-wrap">
+            {[
+              { icon: <AiFillGithub />, href: 'https://github.com/wtrantan', label: 'GitHub', grad: 'from-gray-600 to-gray-800' },
+              { icon: <AiFillLinkedin />, href: 'https://www.linkedin.com/in/wtrantan/', label: 'LinkedIn', grad: 'from-blue-600 to-blue-800' },
+              { icon: <AiFillInstagram />, href: 'https://www.instagram.com/w_trantan/', label: 'Instagram', grad: 'from-pink-600 to-fuchsia-700' },
+            ].map(({ icon, href, label, grad }) => (
+              <a key={label} href={href} target="_blank" rel="noreferrer"
+                className={`group flex items-center gap-1.5 sm:gap-2 px-4 sm:px-5 py-2 rounded-full bg-gradient-to-r ${grad} border border-white/10 text-xs sm:text-sm font-['DM_Sans'] font-medium text-gray-300 hover:text-white transition-all duration-200 hover:scale-105 hover:shadow-lg`}>
+                <span className="text-base sm:text-xl">{icon}</span>
+                {label}
+              </a>
+            ))}
+          </div>
+ 
+          {/* CTA buttons */}
+          <div className="flex justify-center gap-3 flex-wrap">
+            <Link to="projects" spy smooth offset={-72} duration={700}
+              className="cursor-pointer inline-flex items-center gap-2 px-6 sm:px-8 py-3 rounded-full font-['Syne'] font-bold text-xs sm:text-sm tracking-wide
+                bg-violet-600 hover:bg-violet-500 text-white transition-all duration-200 hover:scale-105 shadow-lg shadow-violet-600/30">
+              View Projects ↓
+            </Link>
+            <a href="/resume.pdf" target="_blank"
+              className="inline-flex items-center gap-2 px-6 sm:px-8 py-3 rounded-full font-['Syne'] font-bold text-xs sm:text-sm tracking-wide
+                border border-violet-500/40 text-violet-300 hover:bg-violet-950/50 hover:border-violet-400 transition-all duration-200 hover:scale-105">
+              Résumé ↗
+            </a>
+          </div>
+        </div>
+ 
+        {/* Scroll hint */}
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-40">
+          <span className="font-['DM_Sans'] text-xs tracking-widest uppercase text-gray-500">Scroll</span>
+          <div className="w-px h-8 bg-gradient-to-b from-violet-400 to-transparent animate-pulse" />
+        </div>
+      </section>
+
+      
+      
+      {/* ── ABOUT ── */}
+      <section id="about" name="about" className="relative min-h-screen flex items-center px-4 sm:px-6 py-24 sm:py-32 w-full">
+        <div className="absolute top-20 right-0 w-48 sm:w-72 h-48 sm:h-72 rounded-full opacity-10 blur-3xl pointer-events-none"
+          style={{ background: 'radial-gradient(circle, #6d28d9, transparent)' }} />
+
+        <div className="max-w-5xl mx-auto w-full">
+          <div className="mb-10 sm:mb-16">
+            <span className="font-['DM_Sans'] text-xs tracking-[0.3em] uppercase text-violet-400 mb-3 block">01 — About</span>
+            <h2 className="font-['Syne'] font-extrabold text-4xl sm:text-5xl md:text-6xl text-white">Who I am</h2>
+          </div>
+
+          <div className="grid lg:grid-cols-2 gap-10 sm:gap-12 items-center">
+            {/* Photo */}
+            <div className="relative">
+              <div className="relative w-56 h-56 sm:w-72 sm:h-72 md:w-80 md:h-80 mx-auto">
+                <div className="absolute inset-0 rounded-3xl rotate-3"
+                  style={{ background: 'linear-gradient(135deg, #7c3aed33, #4f46e533)', border: '1px solid rgba(139,92,246,0.2)' }} />
+                <div className="absolute inset-0 rounded-3xl overflow-hidden -rotate-1 ring-1 ring-violet-500/20">
+                  <img src="/me.jpg" alt="William" className="w-full h-full object-cover" />
                 </div>
-                <div className="relative group">
-                  <div className="absolute transition ease-in-out delay-75 group-hover:bg-gradient-to-r from-blue-600 to-purple-400 inset-0 rounded-md blur"></div>
-                    <a href="https://www.linkedin.com/in/wtrantan/" target="_blank"><AiFillLinkedin className="relative transition ease-in-out delay-75 group-hover:scale-110 group-hover:text-gray-200"/></a>
+                <div className="absolute -bottom-3 -right-2 sm:-right-3 bg-[#0d0a1e] border border-violet-500/30 rounded-xl sm:rounded-2xl px-3 sm:px-4 py-2 shadow-xl">
+                  <p className="font-['Syne'] font-bold text-violet-300 text-xs sm:text-sm">CS&amp;E Student</p>
+                  <p className="font-['DM_Sans'] text-gray-500 text-xs">UC Merced</p>
                 </div>
-                <div className="relative group">
-                  <div className="absolute transition ease-in-out delay-75 group-hover:bg-gradient-to-r from-pink-300 to-purple-400 group-hover:scale-110 inset-0 rounded-md blur"></div>
-                  <a href="https://www.instagram.com/w_trantan/" target="_blank"><AiFillInstagram className="relative transition ease-in-out delay-75  group-hover:scale-110  group-hover:text-gray-200"/></a>
+              </div>
+            </div>
+
+            {/* Text */}
+            <div className="mt-10 lg:mt-0">
+              <p className="font-['DM_Sans'] font-light text-gray-300 text-base sm:text-lg leading-relaxed mb-5 sm:mb-6">
+                Born in <span className="text-violet-300 font-medium">Minnesota</span>, raised in <span className="text-violet-300 font-medium">San Jose</span>.
+                I graduated with a Bachelor's in CSE at UC Merced, driven by a lifelong passion for building
+                things with code. From fun side projects to polished software.
+              </p>
+              <p className="font-['DM_Sans'] font-light text-gray-400 text-sm sm:text-base leading-relaxed mb-7 sm:mb-8">
+                Outside of engineering I spend time playing hockey,
+                going hiking, swimming or playing video games. Keeping myself active while away from the computer, besides video games.
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {skills.map(s => (
+                  <span key={s.name}
+                    className="font-['DM_Sans'] text-xs sm:text-sm px-3 sm:px-4 py-1 sm:py-1.5 rounded-full border border-violet-800/60 text-violet-300 bg-violet-950/30 hover:bg-violet-900/40 hover:border-violet-600/60 transition-all duration-200 cursor-default">
+                    {s.name}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── SKILLS GRID ── */}
+      <div className="relative py-16 sm:py-24 px-4 sm:px-6 border-y border-violet-900/30 overflow-hidden w-full"
+        style={{ background: 'rgba(109,40,217,0.04)' }}>
+        <div className="absolute inset-0 pointer-events-none" style={{
+          backgroundImage: 'radial-gradient(rgba(139,92,246,0.1) 1px, transparent 1px)',
+          backgroundSize: '28px 28px'
+        }} />
+        <div className="absolute -top-10 -left-10 w-48 sm:w-64 h-48 sm:h-64 rounded-full blur-3xl pointer-events-none opacity-20"
+          style={{ background: 'radial-gradient(circle, #7c3aed, transparent)' }} />
+        <div className="absolute -bottom-10 -right-10 w-48 sm:w-64 h-48 sm:h-64 rounded-full blur-3xl pointer-events-none opacity-20"
+          style={{ background: 'radial-gradient(circle, #4f46e5, transparent)' }} />
+
+        <div className="max-w-4xl mx-auto relative z-10">
+          <p className="font-['DM_Sans'] text-xs tracking-[0.3em] uppercase text-violet-400 mb-8 sm:mb-10 text-center">Tech Stack</p>
+          <div className="flex flex-wrap justify-center gap-2 sm:gap-3 md:gap-4">
+            {skills.map(({ name, icon }) => (
+              <div key={name}
+                className="group relative flex flex-col items-center justify-center gap-1.5 sm:gap-2 w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-xl sm:rounded-2xl cursor-default
+                  border border-violet-800/20 bg-gradient-to-b from-violet-950/40 to-[#07050f]/60
+                  hover:border-violet-500/50 hover:from-violet-900/50 hover:to-violet-950/60
+                  hover:-translate-y-1 sm:hover:-translate-y-2 hover:shadow-xl hover:shadow-violet-700/20
+                  transition-all duration-300">
+                <div className="absolute inset-0 rounded-xl sm:rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  style={{ background: 'radial-gradient(circle at 50% 40%, rgba(139,92,246,0.15), transparent 70%)' }} />
+                <img src={icon} alt={name} className="w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 object-contain relative z-10 group-hover:scale-110 transition-transform duration-300" />
+                <span className="font-['Syne'] font-bold text-[9px] sm:text-[10px] md:text-xs text-gray-400 group-hover:text-white transition-colors duration-300 relative z-10 tracking-wide text-center px-1 leading-tight">
+                  {name}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+
+
+
+       {/* ── EXPERIENCE ── */}
+      <section id="experience" name="experience" className="relative px-4 sm:px-6 py-24 sm:py-32 w-full">
+        <div className="absolute top-20 right-0 w-64 h-64 rounded-full opacity-10 blur-3xl pointer-events-none"
+          style={{ background: 'radial-gradient(circle, #7c3aed, transparent)' }} />
+ 
+        <div className="max-w-3xl mx-auto">
+          <div className="mb-10 sm:mb-16">
+            <span className="font-['DM_Sans'] text-xs tracking-[0.3em] uppercase text-violet-400 mb-3 block">02 — Experience</span>
+            <h2 className="font-['Syne'] font-extrabold text-4xl sm:text-5xl md:text-6xl text-white">Where I've worked</h2>
+          </div>
+ 
+          {/* Timeline */}
+          <div className="relative">
+            {/* Vertical line */}
+            <div className="absolute left-0 top-0 bottom-0 w-px bg-gradient-to-b from-violet-600 via-violet-800 to-transparent ml-[7px] hidden sm:block" />
+ 
+            <div className="flex flex-col gap-10 sm:gap-12">
+              {experience.map((job, i) => (
+                <div key={i} className="group relative flex gap-6 sm:gap-8">
+                  {/* Timeline dot */}
+                  <div className="hidden sm:flex flex-col items-center shrink-0 mt-1">
+                    <div className={`w-4 h-4 rounded-full bg-gradient-to-br ${job.color} ring-4 ring-[#07050f] group-hover:scale-125 transition-transform duration-300`} />
                   </div>
-              </div>
-            
-            
-            <div className="mx-auto bg-gradient-to-r from-orange-500 to-purple-400 rounded-full w-80 h-80 relative overflow-hidden mt-20 md:h-96 md:w-96">
-            <img src="pfp.jpg" layout="fill" objectFit="cover" className="relative"/>
-            
+ 
+                  {/* Card */}
+                  <div className="flex-1 rounded-2xl border border-white/5 hover:border-violet-500/20 bg-white/[0.02] hover:bg-white/[0.03] p-5 sm:p-6 transition-all duration-300 hover:shadow-xl hover:shadow-violet-900/10">
+                    {/* Top accent bar */}
+                    <div className={`h-0.5 w-10 rounded-full bg-gradient-to-r ${job.color} mb-4 group-hover:w-full transition-all duration-500`} />
+ 
+                    <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-1 sm:gap-4 mb-1">
+                      <h3 className="font-['Syne'] font-extrabold text-lg sm:text-xl text-white leading-tight">{job.company}</h3>
+                      <span className="font-['DM_Sans'] text-xs text-violet-400 bg-violet-950/50 border border-violet-800/40 px-3 py-1 rounded-full shrink-0 self-start">{job.period}</span>
+                    </div>
+ 
+                    <p className={`font-['DM_Sans'] font-medium text-sm bg-gradient-to-r ${job.color} bg-clip-text text-transparent mb-1`}>{job.role}</p>
+                    <p className="font-['DM_Sans'] text-xs text-gray-600 mb-4">{job.location}</p>
+ 
+                    <ul className="flex flex-col gap-2">
+                      {job.bullets.map((b, j) => (
+                        <li key={j} className="flex gap-2 items-start">
+                          <span className="text-violet-500 mt-1 shrink-0 text-xs">▹</span>
+                          <span className="font-['DM_Sans'] font-light text-gray-400 text-sm leading-relaxed">{b}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              ))}
             </div>
-  
           </div>
-          </div>
-          </div>
-          </section>
+        </div>
+      </section>
+      {/* ── PROJECTS ── */}
+      <section id="projects" name="projects" className="relative min-h-screen px-4 sm:px-6 py-24 sm:py-32 w-full">
+        <div className="absolute bottom-20 left-0 w-64 sm:w-80 h-64 sm:h-80 rounded-full opacity-10 blur-3xl pointer-events-none"
+          style={{ background: 'radial-gradient(circle, #7c3aed, transparent)' }} />
 
-          <section className="about">
-          <div className="min-h-screen bg-gradient-to-t from-[#1e1431] to-black bg-blend-lighten bg-fixed items-center bg-no-repeat bg-cover bg-size">
-         
-          <div className="mx-10 lg:flex gap-10 ">
-            <div className=" mx-20  text-center shadow-2xl p-10 rounded-xl my-20 bg-gradient-to-r  from-pink-500 to-gray-800 delay-75  flex-1">
-            
-              <h3 className=" text-purple-300 md:text-4xl text-3xl font-medium pt-8 pb-2  ">
-              About Me
-              </h3>
-              <p className="py-2  md:text-lg text-xl text-gray-200">
-              I was born in Minnesota, and I moved to San Jose! I am a junior pursuing a Bachelor’s in Computer Science & Engineering at the University of California, Merced. I was always interested in learning to code and make fun projects ever since I was young. I have experience in C++, C, SQL, Java, Python, HTML/CSS, JavaScript, Tailwind, and React. Apart from Computer Science I&apos;m interested in Hockey, Water polo, Swimming, and Video Games.
-              </p>
-              <div className="mx-auto  w-80 h-80 relative overflow-hidden mt-20 md:h-96 md:w-96 rounded-3xl ">
-              <img src="me.jpg" layout="fill" objectFit="cover" className="relative"/>
+        <div className="max-w-5xl mx-auto">
+          <div className="mb-10 sm:mb-16">
+            <span className="font-['DM_Sans'] text-xs tracking-[0.3em] uppercase text-violet-400 mb-3 block">02 — Work</span>
+            <h2 className="font-['Syne'] font-extrabold text-4xl sm:text-5xl md:text-6xl text-white">Projects</h2>
+          </div>
+
+         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-10 sm:mb-12">
+            {projects.map((p, i) => (
+              <a key={i} href={p.link} target="_blank" rel="noreferrer"
+                className="group relative rounded-2xl overflow-hidden border border-white/5 hover:border-violet-500/30 bg-white/[0.02] transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-violet-900/20 cursor-pointer flex flex-col">
+
+                {/* Project image */}
+                <div className="relative w-full h-44 sm:h-48 overflow-hidden">
+                  <div className={`absolute inset-0 bg-gradient-to-br ${p.color} opacity-20 z-10`} />
+                  <img
+                    src={p.image}
+                    alt={p.title}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                  {/* Gradient fade into card body */}
+                  <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-[#0d0a1a] to-transparent z-20" />
+                </div>
+
+                {/* Card body */}
+                <div className="flex flex-col flex-1 p-5 sm:p-6">
+                  <div className={`h-0.5 w-10 rounded-full bg-gradient-to-r ${p.color} mb-4 group-hover:w-full transition-all duration-500`} />
+                  <h3 className="font-['Syne'] font-bold text-lg sm:text-xl text-white mb-2">{p.title}</h3>
+                  <p className="font-['DM_Sans'] font-light text-gray-400 text-sm leading-relaxed mb-5 flex-1">{p.description}</p>
+                  <div className="flex flex-wrap gap-2">
+                    {p.tags.map(t => (
+                      <span key={t} className={`text-xs font-['DM_Sans'] px-3 py-1 rounded-full bg-gradient-to-r ${p.color} bg-opacity-10 text-white/70 border border-white/10`}>{t}</span>
+                    ))}
+                  </div>
+                </div>
+              </a>
+            ))}
+          </div>
+
+          {/* GitHub CTA */}
+          <div className="flex justify-center">
+            <div className="flex flex-col items-center gap-4 sm:gap-5 p-8 sm:p-10 rounded-3xl border border-violet-800/30 bg-violet-950/20 w-full sm:w-auto">
+              <AiFillGithub className="text-5xl sm:text-6xl text-violet-400" />
+              <div className="text-center">
+                <p className="font-['Syne'] font-bold text-lg sm:text-xl text-white mb-1">See everything on GitHub</p>
+                <p className="font-['DM_Sans'] text-gray-500 text-sm">More projects, contributions, and experiments</p>
               </div>
-              <div className="relative group  pt-10">
-              <a className="  transition ease-in-out group-hover:scale-110 delay-75 group-hover:bg-gray-200 text-white bg-gray-800 group-hover:text-gray-700 px-4 py-2 border-none rounded-md "
-                  href="resume.pdf" target="_blank">Resume</a>
-              </div>
-              
-            </div>
+              <a href="https://github.com/wtrantan" target="_blank" rel="noreferrer"
+                className="inline-flex items-center gap-2 px-6 sm:px-8 py-3 rounded-full font-['Syne'] font-bold text-sm bg-violet-600 hover:bg-violet-500 text-white transition-all duration-200 hover:scale-105 shadow-lg shadow-violet-600/30">
+                View GitHub ↗
+              </a>
             </div>
           </div>
-          </section>
-          <section className="projects">
-          <div className="min-h-screen bg-mount3 bg-center bg-cover bg-blend-lighten bg-fixed items-center bg-no-repeat ">
-          
-          <div className="mx-10 lg:flex gap-">
-            <div className=" mx-20 text-center shadow-2xl p-10 rounded-xl my-20 bg-gradient-to-r  from-pink-500 to-gray-800 delay-75  flex-1">
-            
-              <h3 className=" text-purple-300 md:text-4xl text-3xl font-medium pt-8 pb-2  ">
-              Projects
-              </h3>
-              <p className="py-2 md:text-lg text-xl text-gray-200">
-              I have compiled all my projects I have worked on here. <a>You can also check my Github!</a>
-              
-              </p>
-              
-              <div className="text-5xl flex justify-center gap-16 py-3 text-gray-400">
-                <div className="relative group">
-                  <div className="absolute transition ease-in-out delay-75  group-hover:bg-gradient-to-r from-orange-300 to-purple-400 group-hover:scale-110 inset-0 rounded-3xl blur"></div>
-                  <a href="https://github.com/wtrantan" target="_blank"><AiFillGithub className="relative transition ease-in-out delay-75  group-hover:scale-110 group-hover:text-gray-200"/></a>
-                </div>
-                </div>
-              
-            </div>
-            </div>
-          </div>
-          </section>
-        
-             
-      </main>
+        </div>
+      </section>
+
+      {/* ── FOOTER ── */}
+      <footer className="border-t border-violet-900/20 py-8 sm:py-10 text-center px-4">
+        <p className="font-['DM_Sans'] text-gray-600 text-xs sm:text-sm">
+          © 2024 William Trantan · Built with Next.js & Tailwind CSS
+        </p>
+      </footer>
     </div>
   );
 }
