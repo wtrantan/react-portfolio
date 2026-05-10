@@ -278,7 +278,7 @@ export default function Home() {
           {/* Badge */}
           <div className="inline-flex items-center gap-2 bg-violet-950/60 border border-violet-500/30 text-violet-300 text-[10px] sm:text-xs font-['DM_Sans'] tracking-widest uppercase px-3 sm:px-4 py-1.5 sm:py-2 rounded-full mb-5 sm:mb-6">
             <span className="w-1.5 h-1.5 bg-violet-400 rounded-full animate-pulse shrink-0" />
-            Test Engineer · UC Merced '25
+            Test Engineer · UC Merced &apos;25
           </div>
  
           <h1 className="font-['Syne'] font-extrabold text-5xl sm:text-6xl md:text-7xl lg:text-8xl leading-none mb-5 sm:mb-6 pb-2"
@@ -361,7 +361,7 @@ export default function Home() {
             <div className="mt-10 lg:mt-0">
               <p className="font-['DM_Sans'] font-light text-gray-300 text-base sm:text-lg leading-relaxed mb-5 sm:mb-6">
                 Born in <span className="text-violet-300 font-medium">Minnesota</span>, raised in <span className="text-violet-300 font-medium">San Jose</span>.
-                I graduated with a Bachelor's in CSE at UC Merced, driven by a lifelong passion for building
+                I graduated with a Bachelor&apos;s in CSE at UC Merced, driven by a lifelong passion for building
                 things with code. From fun side projects to polished software.
               </p>
               <p className="font-['DM_Sans'] font-light text-gray-400 text-sm sm:text-base leading-relaxed mb-7 sm:mb-8">
