@@ -376,7 +376,7 @@ const visibleSkills = showAll ? skills : skills.slice(0, MOBILE_LIMIT);
   {/* Mobile dropdown */}
   <div className={`md:hidden overflow-hidden transition-all duration-300 ${menuOpen ? 'max-h-96 pb-4' : 'max-h-0'}`}>
     <ul className="flex flex-col px-4 gap-1">
-      {['Home', 'About', 'Skills', 'Experience', 'Projects'].map(item => (
+      {['Home', 'About', 'Experience', 'Projects', 'Skills'].map(item => (
         <li key={item}>
           <Link
             to={item.toLowerCase()}
@@ -461,10 +461,10 @@ const visibleSkills = showAll ? skills : skills.slice(0, MOBILE_LIMIT);
         </div>
  
         {/* Scroll hint */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-40">
-          <span className="font-['DM_Sans'] text-xs tracking-widest uppercase text-gray-500">Scroll</span>
-          <div className="w-px h-8 bg-gradient-to-b from-sky-300 to-transparent animate-pulse" />
-        </div>
+        <div className="hidden sm:flex absolute bottom-4   left-1/2 -translate-x-1/2 flex-col items-center gap-2 opacity-40">
+  <span className="font-['DM_Sans'] text-xs tracking-widest uppercase text-gray-500">Scroll</span>
+  <div className="w-px h-8 bg-gradient-to-b from-sky-300 to-transparent animate-pulse" />
+</div>
 
         <div
   className="absolute pointer-events-none hidden md:block"
