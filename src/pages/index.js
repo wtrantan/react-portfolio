@@ -8,6 +8,7 @@ export default function Home() {
   const [mousePos, setMousePos] = useState({ x: -999, y: -999 });
   const canvasRef = useRef(null);
 
+
   
 // NEW: We use a mutable ref for the physics engine to read instantly
   const physicsMouse = useRef({ x: -999, y: -999 });
@@ -307,7 +308,11 @@ export default function Home() {
   },
   
 ];
+const [showAll, setShowAll] = useState(false);
+const MOBILE_LIMIT = 8;
 
+// On mobile: slice unless expanded. On sm+ always show all (handled via CSS too).
+const visibleSkills = showAll ? skills : skills.slice(0, MOBILE_LIMIT);
   return (
     <div className="bg-[#061923] text-white font-sans overflow-x-hidden w-full">
       <Head>
@@ -722,39 +727,76 @@ export default function Home() {
 </div>
       </section>
       {/* ── SKILLS SECTION ── */}
-      <section id="skills" name="skills" className="relative py-40 px-4 sm:px-6 border-y border-sky-900/30 overflow-hidden w-full"
-        style={{ background: 'rgba(14,116,144,0.05)' }}>
-        
-        {/* Background Decor */}
-        <div className="absolute inset-0 pointer-events-none" style={{
-          backgroundImage: 'radial-gradient(rgba(125,211,252,0.12) 1px, transparent 1px)',
-          backgroundSize: '32px 32px'
-        }} />
+      <section
+  id="skills"
+  name="skills"
+  className="relative py-20 sm:py-40 px-4 sm:px-6 border-y border-sky-900/30 overflow-hidden w-full"
+  style={{ background: 'rgba(14,116,144,0.05)' }}
+>
+  <div
+    className="absolute inset-0 pointer-events-none"
+    style={{
+      backgroundImage: 'radial-gradient(rgba(125,211,252,0.12) 1px, transparent 1px)',
+      backgroundSize: '32px 32px',
+    }}
+  />
 
-        <div className="max-w-5xl mx-auto relative z-10">
-          <div className="text-center mb-16">
-            <span className="font-['DM_Sans'] text-xs tracking-[0.3em] uppercase text-sky-300 mb-3 block">Technologies I&apos;ve used so far</span>
-            <h2 className="font-['Archivo_Black'] font-extrabold text-4xl sm:text-5xl text-white">Tech Stack</h2>
-          </div>
+  <div className="max-w-5xl mx-auto relative z-10">
+    <div className="text-center mb-10 sm:mb-16">
+      <span className="font-['DM_Sans'] text-xs tracking-[0.3em] uppercase text-sky-300 mb-3 block">
+        Technologies I&apos;ve used so far
+      </span>
+      <h2 className="font-['Archivo_Black'] font-extrabold text-3xl sm:text-4xl md:text-5xl text-white">
+        Tech Stack
+      </h2>
+    </div>
 
-          <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-7 gap-4 sm:gap-6">
-            {skills.map(({ name, icon, needsInvert }) => (
-                <div key={name} className="group ...">
-                  <img 
-                    src={icon} 
-                    alt={name} 
-                    className={`w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 object-contain transition-all duration-300 
-                      ${needsInvert ? 'brightness-0 invert' : ''} 
-                      group-hover:scale-110`} 
-                  />
-                  <span className="...">
-                    {name}
-                  </span>
-                </div>
-              ))}
-          </div>
+    {/* Desktop: always full grid. Mobile: sliced list + toggle */}
+    <div className="hidden sm:grid sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-7 gap-6">
+      {skills.map(({ name, icon, needsInvert }) => (
+        <div key={name} className="group ...">
+          <img
+            src={icon}
+            alt={name}
+            className={`w-8 h-8 md:w-9 md:h-9 object-contain transition-all duration-300
+              ${needsInvert ? 'brightness-0 invert' : ''}
+              group-hover:scale-110`}
+          />
+          <span className="...">{name}</span>
         </div>
-      </section>
+      ))}
+    </div>
+
+    <div className="sm:hidden">
+      <div className="grid grid-cols-4 gap-3">
+        {visibleSkills.map(({ name, icon, needsInvert }) => (
+          <div key={name} className="group ...">
+            <img
+              src={icon}
+              alt={name}
+              className={`w-7 h-7 object-contain transition-all duration-300
+                ${needsInvert ? 'brightness-0 invert' : ''}
+                group-hover:scale-110`}
+            />
+            <span className="...">{name}</span>
+          </div>
+        ))}
+      </div>
+
+      {skills.length > MOBILE_LIMIT && (
+        <div className="text-center mt-6">
+          <button
+            onClick={() => setShowAll(prev => !prev)}
+            className="font-['DM_Sans'] text-xs tracking-[0.2em] uppercase text-sky-300 border border-sky-700 rounded-full px-5 py-2 hover:bg-sky-900/30 transition-colors"
+          >
+            {showAll ? 'Show less ↑' : `Show all ${skills.length} ↓`}
+          </button>
+        </div>
+      )}
+    </div>
+
+  </div>
+</section>
 
       {/* ── FOOTER ── */}
      <footer className="relative overflow-hidden border-t border-sky-900/25 pt-14 pb-10 sm:pt-16 sm:pb-12 text-center px-4">
