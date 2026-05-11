@@ -81,7 +81,7 @@ export default function Home() {
           ctx.beginPath();
           ctx.moveTo(p.x, p.y);
           ctx.lineTo(mouseX, mouseY);
-          ctx.strokeStyle = `rgba(167, 139, 250, ${0.2 * (1 - distMouse / interactionRadius)})`;
+          ctx.strokeStyle = `rgba(125, 211, 252, ${0.2 * (1 - distMouse / interactionRadius)})`;
           ctx.lineWidth = 1;
           ctx.stroke();
         } else {
@@ -102,7 +102,7 @@ export default function Home() {
         // --- 3. DRAW PARTICLE ---
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(167, 139, 250, ${p.opacity})`;
+        ctx.fillStyle = `rgba(125, 211, 252, ${p.opacity})`;
         ctx.fill();
       });
 
@@ -118,7 +118,7 @@ export default function Home() {
             ctx.beginPath();
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(particles[j].x, particles[j].y);
-            ctx.strokeStyle = `rgba(167, 139, 250, ${0.1 * (1 - dist / 100)})`;
+            ctx.strokeStyle = `rgba(125, 211, 252, ${0.1 * (1 - dist / 100)})`;
             ctx.lineWidth = 0.5;
             ctx.stroke();
           }
@@ -193,7 +193,7 @@ export default function Home() {
       role: 'Full-Stack Developer Intern',
       period: 'May 2025 – Aug 2025',
       location: 'Remote',
-      color: 'from-violet-600 to-indigo-500',
+      color: 'from-sky-400 to-cyan-500',
       bullets: [
         'Developing a media web platform with Tiny Health Tales and tooling for creation of health flyers.',
         'Designing accessible UI/UX and MERN stack for efficient storage of media.',
@@ -205,7 +205,7 @@ export default function Home() {
       role: 'Full-Stack Developer Intern – LLM Model for Health Data',
       period: 'Jan 2025 – May 2025',
       location: 'Remote',
-      color: 'from-fuchsia-600 to-pink-500',
+      color: 'from-cyan-400 to-teal-500',
       bullets: [
         'Developed an AI-powered mobile health assistant integrating simulated biosensor data with a LLM.',
         'Built a retrieval-augmented generation (RAG) pipeline using AWS to analyze biomarkers from 20+ research papers.',
@@ -217,7 +217,7 @@ export default function Home() {
       role: 'Frontend Web Developer',
       period: 'Dec 2023 – Aug 2024',
       location: 'Remote',
-      color: 'from-cyan-600 to-blue-500',
+      color: 'from-blue-300 to-sky-500',
       bullets: [
         'Designed and developed a responsive website from scratch using React and TypeScript for health education outreach.',
         'Produced user-friendly interfaces reaching ~40 users in the San Joaquin Valley.',
@@ -229,7 +229,7 @@ export default function Home() {
       role: 'Frontend & Mobile Web Developer Intern',
       period: 'Nov 2020 – Jul 2021',
       location: 'Remote',
-      color: 'from-emerald-600 to-teal-500',
+      color: 'from-teal-400 to-emerald-500',
       bullets: [
         'Redesigned the company website using HTML, CSS, Bootstrap, and WordPress, improving mobile responsiveness by 30%.',
         'Enhanced mobile accessibility by adjusting visual elements for smaller screens.',
@@ -242,7 +242,8 @@ export default function Home() {
     title: 'Portfolio Website',
     description: 'Personal portfolio built with Next.js, React, and Tailwind CSS featuring animated UI and smooth scroll navigation.',
     tags: ['React', 'Next.js', 'Tailwind'],
-    color: 'from-violet-600 to-indigo-600',
+    color: 'from-sky-400 to-cyan-500',
+    tagColor: 'from-sky-800 to-cyan-900',
     image: '/projects/portfolio.png',
     link: 'https://github.com/wtrantan/react-portfolio',
   },
@@ -263,7 +264,8 @@ export default function Home() {
     'API Integration',
     'UI/UX'
   ],
-    color: 'from-fuchsia-600 to-pink-600',
+    color: 'from-sky-400 to-cyan-500',
+    tagColor: 'from-sky-800 to-cyan-900',
     image: '/projects/Cover.png',
     link: 'https://karime-rank.vercel.app/',
   },
@@ -271,7 +273,8 @@ export default function Home() {
     title: 'Chat & Chill',
     description: 'A winter-themed multiplayer web game featuring real-time chat, snowball mechanics, and rarity-based fishing within randomly generated shared lobbies, seamlessly supporting up to 8 concurrent players.',
     tags: ['Socket.IO', 'Express.js', 'SQLite', 'WebSockets'],
-    color: 'from-cyan-600 to-blue-600',
+    color: 'from-sky-400 to-cyan-500',
+    tagColor: 'from-sky-800 to-cyan-900',
     image: '/projects/penguin.png',
     link: 'https://cse108-project-shooter-game.onrender.com/',
   },
@@ -279,7 +282,8 @@ export default function Home() {
     title: 'KarinaSys',
     description: 'An introductory exploration of 3D web development with Three.js, demonstrating the fundamentals of manipulating geometries, lighting, and camera perspectives within a digital space.',
     tags: ['Three.js'],
-    color: 'from-emerald-400 to-teal-600',
+    color: 'from-sky-400 to-cyan-500',
+    tagColor: 'from-sky-800 to-cyan-900',
     image: '/projects/karinasys.png',
     link: 'https://karinasys.vercel.app/',
   },
@@ -287,7 +291,8 @@ export default function Home() {
     title: 'Cauldron Creates',
     description: 'A full-stack recipe generation application that utilizes AI to instantly brew healthy, step-by-step meals based on whatever ingredients users currently have on hand. Designed to reduce food waste and streamline meal prep, it features calorie tracking and a personalized digital cookbook for saving favorite dishes.',
     tags: ['React', 'Node.js', 'Express.js','MySQL', 'openAI API'],
-    color: 'from-indigo-300 to-purple-400',
+    color: 'from-sky-400 to-cyan-500',
+    tagColor: 'from-sky-800 to-cyan-900',
     image: '/projects/cauldron.png',
     link: 'https://github.com/wtrantan/HackDavis',
   },
@@ -295,7 +300,8 @@ export default function Home() {
     title: 'Profit Prophet',
     description: 'An AI-powered personal finance assistant that integrates secure banking data to analyze transactions and deliver personalized budgeting advice. Features an intelligent, real-time chatbot designed to empower users with smarter saving strategies and actionable financial clarity.',
     tags: ['React', 'Node.js','Express.js', 'MongoDB', 'Gemini API'],
-    color: 'from-orange-400 to-rose-500',
+    color: 'from-sky-400 to-cyan-500',
+    tagColor: 'from-sky-800 to-cyan-900',
     image: '/projects/profit.jpg',
     link: 'https://github.com/wtrantan/HackDavis',
   },
@@ -303,7 +309,7 @@ export default function Home() {
 ];
 
   return (
-    <div className="bg-[#07050f] text-white font-sans overflow-x-hidden w-full">
+    <div className="bg-[#061923] text-white font-sans overflow-x-hidden w-full">
       <Head>
         <title>William Trantan — Portfolio</title>
         <meta name="description" content="William Trantan — CS Student & Developer" />
@@ -318,7 +324,7 @@ export default function Home() {
         style={{
           left: mousePos.x - 128,
           top: mousePos.y - 128,
-          background: 'radial-gradient(circle, rgba(139,92,246,0.08) 0%, transparent 70%)',
+          background: 'radial-gradient(circle, rgba(125,211,252,0.12) 0%, transparent 70%)',
           willChange: 'left, top',
         }}
       />
@@ -328,13 +334,13 @@ export default function Home() {
 
       {/* ── NAV ── */}
 <nav className="fixed top-0 left-0 right-0 z-40"
-  style={{ background: 'rgba(7,5,15,0.85)', backdropFilter: 'blur(16px)', borderBottom: '1px solid rgba(139,92,246,0.08)' }}>
+  style={{ background: 'rgba(6,25,35,0.84)', backdropFilter: 'blur(16px)', borderBottom: '1px solid rgba(125,211,252,0.14)' }}>
   <div className="flex items-center justify-between px-4 sm:px-8 py-4">
-    <span className="font-['Syne'] font-extrabold text-lg tracking-widest text-violet-300 uppercase">WT</span>
+    <span className="font-['Archivo_Black'] font-extrabold text-lg tracking-widest text-sky-200 uppercase">WT</span>
 
     {/* Desktop links */}
     <ul className="hidden md:flex gap-1">
-      {['Home', 'About', 'Skills', 'Experience', 'Projects'].map(item => (
+      {['Home', 'About', 'Experience', 'Projects', 'Skills'].map(item => (
         <li key={item}>
           <Link
             to={item.toLowerCase()}
@@ -342,8 +348,8 @@ export default function Home() {
             onSetActive={() => setActiveSection(item.toLowerCase())}
             className={`cursor-pointer px-4 py-2 rounded-full font-['DM_Sans'] text-sm font-medium transition-all duration-300
               ${activeSection === item.toLowerCase()
-                ? 'bg-violet-600 text-white shadow-lg shadow-violet-500/30'
-                : 'text-gray-400 hover:text-white hover:bg-white/5'}`}
+                ? 'bg-sky-500/80 text-white shadow-lg shadow-sky-400/25'
+                : 'text-slate-300 hover:text-white hover:bg-white/5'}`}
           >
             {item}
           </Link>
@@ -356,9 +362,9 @@ export default function Home() {
       className="md:hidden flex flex-col justify-center items-center w-8 h-8 gap-1.5 cursor-pointer"
       onClick={() => setMenuOpen(prev => !prev)}
       aria-label="Toggle menu">
-      <span className={`block w-6 h-0.5 bg-violet-300 transition-all duration-300 ${menuOpen ? 'rotate-45 translate-y-2' : ''}`} />
-      <span className={`block w-6 h-0.5 bg-violet-300 transition-all duration-300 ${menuOpen ? 'opacity-0' : ''}`} />
-      <span className={`block w-6 h-0.5 bg-violet-300 transition-all duration-300 ${menuOpen ? '-rotate-45 -translate-y-2' : ''}`} />
+      <span className={`block w-6 h-0.5 bg-sky-200 transition-all duration-300 ${menuOpen ? 'rotate-45 translate-y-2' : ''}`} />
+      <span className={`block w-6 h-0.5 bg-sky-200 transition-all duration-300 ${menuOpen ? 'opacity-0' : ''}`} />
+      <span className={`block w-6 h-0.5 bg-sky-200 transition-all duration-300 ${menuOpen ? '-rotate-45 -translate-y-2' : ''}`} />
     </button>
   </div>
 
@@ -374,8 +380,8 @@ export default function Home() {
             onClick={() => setMenuOpen(false)}
             className={`block cursor-pointer px-4 py-3 rounded-xl font-['DM_Sans'] text-sm font-medium transition-all duration-200
               ${activeSection === item.toLowerCase()
-                ? 'bg-violet-600/20 text-violet-300 border border-violet-600/30'
-                : 'text-gray-400 hover:text-white hover:bg-white/5'}`}
+                ? 'bg-sky-400/15 text-sky-200 border border-sky-300/25'
+                : 'text-slate-300 hover:text-white hover:bg-white/5'}`}
           >
             {item}
           </Link>
@@ -385,31 +391,32 @@ export default function Home() {
   </div>
 </nav>
 
+
       {/* ── HERO ── */}
       <section id="home" name="home" className="relative min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 pt-24 pb-16 w-full box-border">
         <div className="absolute top-1/4 left-1/4 w-64 sm:w-96 h-64 sm:h-96 rounded-full opacity-20 blur-3xl pointer-events-none"
-          style={{ background: 'radial-gradient(circle, #7c3aed, transparent)' }} />
+          style={{ background: 'radial-gradient(circle, #7dd3fc, transparent)' }} />
         <div className="absolute bottom-1/3 right-1/4 w-56 sm:w-80 h-56 sm:h-80 rounded-full opacity-15 blur-3xl pointer-events-none"
-          style={{ background: 'radial-gradient(circle, #4f46e5, transparent)' }} />
+          style={{ background: 'radial-gradient(circle, #5eead4, transparent)' }} />
  
         <div className="relative z-10 text-center w-full max-w-3xl mx-auto px-4">
           {/* Avatar */}
           <div className="relative inline-block mb-8">
-            <div className="w-28 h-28 sm:w-36 sm:h-36 md:w-44 md:h-44 rounded-full mx-auto overflow-hidden ring-4 ring-violet-500/40 shadow-2xl shadow-violet-500/20"
-              style={{ background: 'linear-gradient(135deg, #7c3aed, #4f46e5)' }}>
+            <div className="w-28 h-28 sm:w-36 sm:h-36 md:w-44 md:h-44 rounded-full mx-auto overflow-hidden ring-4 ring-sky-300/40 shadow-2xl shadow-sky-300/20"
+              style={{ background: 'linear-gradient(135deg, #7dd3fc, #5eead4)' }}>
               <img src="/pfp.png" alt="William Trantan" className="w-full h-full object-cover" />
             </div>
-            <span className="absolute bottom-1 right-1 w-3.5 h-3.5 sm:w-4 sm:h-4 bg-emerald-400 rounded-full border-2 border-[#07050f] shadow-lg shadow-emerald-400/50" />
+            <span className="absolute bottom-1 right-1 w-3.5 h-3.5 sm:w-4 sm:h-4 bg-teal-300 rounded-full border-2 border-[#061923] shadow-lg shadow-teal-300/40" />
           </div>
  
           {/* Badge */}
-          <div className="inline-flex items-center gap-2 bg-violet-950/60 border border-violet-500/30 text-violet-300 text-[10px] sm:text-xs font-['DM_Sans'] tracking-widest uppercase px-3 sm:px-4 py-1.5 sm:py-2 rounded-full mb-5 sm:mb-6">
-            <span className="w-1.5 h-1.5 bg-violet-400 rounded-full animate-pulse shrink-0" />
-            Test Engineer · UC Merced &apos;25
+          <div className="inline-flex items-center gap-2 bg-sky-950/45 border border-sky-300/30 text-sky-200 text-[10px] sm:text-xs font-['DM_Sans'] tracking-widest uppercase px-3 sm:px-4 py-1.5 sm:py-2 rounded-full mb-5 sm:mb-6">
+            <span className="w-1.5 h-1.5 bg-teal-300 rounded-full animate-pulse shrink-0" />
+            Test Engineer · Quanta · UC Merced &apos;25
           </div>
  
-          <h1 className="font-['Syne'] font-extrabold text-5xl sm:text-6xl md:text-7xl lg:text-8xl leading-none mb-5 sm:mb-6 pb-2"
-            style={{ background: 'linear-gradient(135deg, #fff 0%, #a78bfa 60%, #818cf8 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
+          <h1 className="font-['Archivo_Black'] font-extrabold text-5xl sm:text-6xl md:text-7xl lg:text-8xl leading-none mb-5 sm:mb-6 pb-2"
+            style={{ background: 'linear-gradient(135deg, #f8fdff 0%, #bae6fd 58%, #5eead4 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
             William<br />Trantan
           </h1>
  
@@ -423,7 +430,7 @@ export default function Home() {
             {[
               { icon: <AiFillGithub />, href: 'https://github.com/wtrantan', label: 'GitHub', grad: 'from-gray-600 to-gray-800' },
               { icon: <AiFillLinkedin />, href: 'https://www.linkedin.com/in/wtrantan/', label: 'LinkedIn', grad: 'from-blue-600 to-blue-800' },
-              { icon: <AiFillInstagram />, href: 'https://www.instagram.com/w_trantan/', label: 'Instagram', grad: 'from-pink-600 to-fuchsia-700' },
+              { icon: <AiFillInstagram />, href: 'https://www.instagram.com/w_trantan/', label: 'Instagram', grad: 'from-pink-600 to-fuchsia-800' },
             ].map(({ icon, href, label, grad }) => (
               <a key={label} href={href} target="_blank" rel="noreferrer"
                 className={`group flex items-center gap-1.5 sm:gap-2 px-4 sm:px-5 py-2 rounded-full bg-gradient-to-r ${grad} border border-white/10 text-xs sm:text-sm font-['DM_Sans'] font-medium text-gray-300 hover:text-white transition-all duration-200 hover:scale-105 hover:shadow-lg`}>
@@ -436,13 +443,13 @@ export default function Home() {
           {/* CTA buttons */}
           <div className="flex justify-center gap-3 flex-wrap">
             <Link to="projects" spy smooth offset={-72} duration={700}
-              className="cursor-pointer inline-flex items-center gap-2 px-6 sm:px-8 py-3 rounded-full font-['Syne'] font-bold text-xs sm:text-sm tracking-wide
-                bg-violet-600 hover:bg-violet-500 text-white transition-all duration-200 hover:scale-105 shadow-lg shadow-violet-600/30">
+              className="cursor-pointer inline-flex items-center gap-2 px-6 sm:px-8 py-3 rounded-full font-['Archivo_Black'] font-bold text-xs sm:text-sm tracking-wide
+                bg-sky-500 hover:bg-sky-400 text-[#04202d] transition-all duration-200 hover:scale-105 shadow-lg shadow-sky-400/25">
               View Projects ↓
             </Link>
             <a href="/resume.pdf" target="_blank"
-              className="inline-flex items-center gap-2 px-6 sm:px-8 py-3 rounded-full font-['Syne'] font-bold text-xs sm:text-sm tracking-wide
-                border border-violet-500/40 text-violet-300 hover:bg-violet-950/50 hover:border-violet-400 transition-all duration-200 hover:scale-105">
+              className="inline-flex items-center gap-2 px-6 sm:px-8 py-3 rounded-full font-['Archivo_Black'] font-bold text-xs sm:text-sm tracking-wide
+                border border-sky-300/40 text-sky-200 hover:bg-sky-950/40 hover:border-sky-200 transition-all duration-200 hover:scale-105">
               Résumé ↗
             </a>
           </div>
@@ -451,8 +458,32 @@ export default function Home() {
         {/* Scroll hint */}
         <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-40">
           <span className="font-['DM_Sans'] text-xs tracking-widest uppercase text-gray-500">Scroll</span>
-          <div className="w-px h-8 bg-gradient-to-b from-violet-400 to-transparent animate-pulse" />
+          <div className="w-px h-8 bg-gradient-to-b from-sky-300 to-transparent animate-pulse" />
         </div>
+
+        <div
+  className="absolute pointer-events-none hidden md:block"
+  style={{
+    left: '55%',        // ← move this value, e.g. '-5%' to tuck left edge off screen
+    top: '40%',
+    transform: 'translateY(-50%)',
+    zIndex: 0,
+    width: '820px',
+    animation: 'whaleFloat 7s ease-in-out infinite',
+    
+  }}
+>
+  <img
+    src="/wailord.png"
+    alt=""
+    style={{
+      width: '100%',
+      opacity: 0.22,
+      filter: 'contrast(1.4) brightness(1.2)',
+      
+    }}
+  />
+</div>
       </section>
 
       
@@ -460,12 +491,12 @@ export default function Home() {
       {/* ── ABOUT ── */}
       <section id="about" name="about" className="relative min-h-screen flex items-center px-4 sm:px-6 py-24 sm:py-32 w-full">
         <div className="absolute top-20 right-0 w-48 sm:w-72 h-48 sm:h-72 rounded-full opacity-10 blur-3xl pointer-events-none"
-          style={{ background: 'radial-gradient(circle, #6d28d9, transparent)' }} />
+          style={{ background: 'radial-gradient(circle, #38bdf8, transparent)' }} />
 
         <div className="max-w-5xl mx-auto w-full">
           <div className="mb-10 sm:mb-16">
-            <span className="font-['DM_Sans'] text-xs tracking-[0.3em] uppercase text-violet-400 mb-3 block">About</span>
-            <h2 className="font-['Syne'] font-extrabold text-4xl sm:text-5xl md:text-6xl text-white">Who I am</h2>
+            <span className="font-['DM_Sans'] text-xs tracking-[0.3em] uppercase text-sky-300 mb-3 block">About</span>
+            <h2 className="font-['Archivo_Black'] font-extrabold text-4xl sm:text-5xl md:text-6xl text-white">Who I am</h2>
           </div>
 
           <div className="grid lg:grid-cols-2 gap-10 sm:gap-12 items-center">
@@ -473,12 +504,12 @@ export default function Home() {
             <div className="relative">
               <div className="relative w-56 h-56 sm:w-72 sm:h-72 md:w-80 md:h-80 mx-auto">
                 <div className="absolute inset-0 rounded-3xl rotate-3"
-                  style={{ background: 'linear-gradient(135deg, #7c3aed33, #4f46e533)', border: '1px solid rgba(139,92,246,0.2)' }} />
-                <div className="absolute inset-0 rounded-3xl overflow-hidden -rotate-1 ring-1 ring-violet-500/20">
+                  style={{ background: 'linear-gradient(135deg, #7dd3fc33, #5eead433)', border: '1px solid rgba(125,211,252,0.24)' }} />
+                <div className="absolute inset-0 rounded-3xl overflow-hidden -rotate-1 ring-1 ring-sky-300/25">
                   <img src="/me.jpg" alt="William" className="w-full h-full object-cover" />
                 </div>
-                <div className="absolute -bottom-3 -right-2 sm:-right-3 bg-[#0d0a1e] border border-violet-500/30 rounded-xl sm:rounded-2xl px-3 sm:px-4 py-2 shadow-xl">
-                  <p className="font-['Syne'] font-bold text-violet-300 text-xs sm:text-sm">Test Engineer</p>
+                <div className="absolute -bottom-3 -right-2 sm:-right-3 bg-[#092838] border border-sky-300/30 rounded-xl sm:rounded-2xl px-3 sm:px-4 py-2 shadow-xl">
+                  <p className="font-['Syne'] font-bold text-sky-200 text-xs sm:text-sm">Test Engineer</p>
                   <p className="font-['DM_Sans'] text-gray-500 text-xs">Quanta</p>
                 </div>
               </div>
@@ -487,7 +518,7 @@ export default function Home() {
             {/* Text */}
             <div className="mt-10 lg:mt-0">
               <p className="font-['DM_Sans'] font-light text-gray-300 text-base sm:text-lg leading-relaxed mb-5 sm:mb-6">
-                Born in <span className="text-violet-300 font-medium">Minnesota</span>, raised in <span className="text-violet-300 font-medium">San Jose</span>.
+                Born in <span className="text-sky-200 font-medium">Minnesota</span>, raised in <span className="text-sky-200 font-medium">San Jose</span>.
                 I graduated with a Bachelor&apos;s in CSE at UC Merced, driven by a lifelong passion for building
                 things with code. From fun side projects to polished software.
               </p>
@@ -498,7 +529,7 @@ export default function Home() {
               <div className="flex flex-wrap gap-2">
                 {/* {skills.map(s => (
                   <span key={s.name}
-                    className="font-['DM_Sans'] text-xs sm:text-sm px-3 sm:px-4 py-1 sm:py-1.5 rounded-full border border-violet-800/60 text-violet-300 bg-violet-950/30 hover:bg-violet-900/40 hover:border-violet-600/60 transition-all duration-200 cursor-default">
+                    className="font-['DM_Sans'] text-xs sm:text-sm px-3 sm:px-4 py-1 sm:py-1.5 rounded-full border border-sky-700/50 text-sky-200 bg-sky-950/25 hover:bg-sky-900/35 hover:border-sky-400/50 transition-all duration-200 cursor-default">
                     {s.name}
                   </span>
                 ))} */}
@@ -506,22 +537,204 @@ export default function Home() {
             </div>
           </div>
         </div>
+        <div
+  className="absolute pointer-events-none hidden md:block"
+  style={{
+    left: '-5%',        // ← move this value, e.g. '-5%' to tuck left edge off screen
+    top: '70%',
+    transform: 'translateY(-50%)',
+    zIndex: 0,
+    width: '820px',
+    animation: 'whaleFloat 7s ease-in-out infinite',
+  }}
+>
+  <img
+    src="/lugia.png"
+    alt=""
+    style={{
+      width: '100%',
+      opacity: 0.22,
+      filter: 'contrast(1.4) brightness(1.2)',
+      
+    }}
+  />
+</div>
       </section>
 
+
+
+       {/* ── EXPERIENCE ── */}
+      <section id="experience" name="experience" className="relative px-4 sm:px-6 py-24 sm:py-32 w-full">
+        <div className="absolute top-20 right-0 w-64 h-64 rounded-full opacity-10 blur-3xl pointer-events-none"
+          style={{ background: 'radial-gradient(circle, #7dd3fc, transparent)' }} />
+ 
+        <div className="max-w-3xl mx-auto">
+          <div className="mb-10 sm:mb-16">
+            <span className="font-['DM_Sans'] text-xs tracking-[0.3em] uppercase text-sky-300 mb-3 block">Experience</span>
+            <h2 className="font-['Archivo_Black'] font-extrabold text-4xl sm:text-5xl md:text-6xl text-white">Where I&apos;ve worked</h2>
+          </div>
+ 
+          {/* Timeline */}
+          <div className="relative">
+            {/* Vertical line */}
+            <div className="absolute left-0 top-0 bottom-0 w-px bg-gradient-to-b from-sky-400 via-cyan-700 to-transparent ml-[7px] hidden sm:block" />
+ 
+            <div className="flex flex-col gap-10 sm:gap-12">
+              {experience.map((job, i) => (
+                <div key={i} className="group relative flex gap-6 sm:gap-8">
+                  {/* Timeline dot */}
+                  <div className="hidden sm:flex flex-col items-center shrink-0 mt-1">
+                    <div className={`w-4 h-4 rounded-full bg-gradient-to-br ${job.color} ring-4 ring-[#061923] group-hover:scale-125 transition-transform duration-300`} />
+                  </div>
+ 
+                  {/* Card */}
+                  <div className="flex-1 rounded-2xl border border-white/5 hover:border-sky-300/25 bg-white/[0.03] hover:bg-white/[0.045] p-5 sm:p-6 transition-all duration-300 hover:shadow-xl hover:shadow-sky-950/20">
+                    {/* Top accent bar */}
+                    <div className={`h-0.5 w-10 rounded-full bg-gradient-to-r ${job.color} mb-4 group-hover:w-full transition-all duration-500`} />
+ 
+                    <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-1 sm:gap-4 mb-1">
+                      <h3 className=" font-extrabold text-lg sm:text-xl text-white leading-tight">{job.company}</h3>
+                      <span className="font-['DM_Sans'] text-xs text-sky-200 bg-sky-950/45 border border-sky-700/40 px-3 py-1 rounded-full shrink-0 self-start">{job.period}</span>
+                    </div>
+ 
+                    <p className={`font-['DM_Sans'] font-medium text-sm bg-gradient-to-r ${job.color} bg-clip-text text-transparent mb-1`}>{job.role}</p>
+                    <p className="font-['DM_Sans'] text-xs text-gray-600 mb-4">{job.location}</p>
+ 
+                    <ul className="flex flex-col gap-2">
+                      {job.bullets.map((b, j) => (
+                        <li key={j} className="flex gap-2 items-start">
+                          <span className="text-sky-300 mt-1 shrink-0 text-xs">▹</span>
+                          <span className="font-['DM_Sans'] font-light text-gray-400 text-sm leading-relaxed">{b}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+         <div
+  className="absolute pointer-events-none hidden md:block"
+  style={{
+    left: '72%',        // ← move this value, e.g. '-5%' to tuck left edge off screen
+    top: '30%',
+    transform: 'translateY(-50%)',
+    zIndex: 0,
+    width: '520px',
+    animation: 'whaleFloat 7s ease-in-out infinite',
+  }}
+>
+  <img
+    src="/kyogre2.png"
+    alt=""
+    style={{
+      width: '100%',
+      opacity: 0.22,
+      filter: 'contrast(1.4) brightness(1.2)',
+      
+    }}
+  />
+</div>
+      </section>
+      {/* ── PROJECTS ── */}
+      <section id="projects" name="projects" className="relative min-h-screen px-4 sm:px-6 py-24 sm:py-32 w-full">
+        <div className="absolute bottom-20 left-0 w-64 sm:w-80 h-64 sm:h-80 rounded-full opacity-10 blur-3xl pointer-events-none"
+          style={{ background: 'radial-gradient(circle, #5eead4, transparent)' }} />
+
+        <div className="max-w-5xl mx-auto">
+          <div className="mb-10 sm:mb-16">
+            <span className="font-['DM_Sans'] text-xs tracking-[0.3em] uppercase text-sky-300 mb-3 block">Work</span>
+            <h2 className="font-['Archivo_Black'] font-extrabold text-4xl sm:text-5xl md:text-6xl text-white">Projects</h2>
+            <p ></p>
+          </div>
+
+         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-10 sm:mb-12">
+            {projects.map((p, i) => (
+              <a key={i} href={p.link} target="_blank" rel="noreferrer"
+                className="group relative rounded-2xl overflow-hidden border border-white/5 hover:border-sky-300/30 bg-white/[0.03] transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-sky-950/25 cursor-pointer flex flex-col">
+
+                {/* Project image */}
+                <div className="relative w-full h-44 sm:h-48 overflow-hidden">
+                  <div className={`absolute inset-0 bg-gradient-to-br ${p.color} opacity-20 z-10`} />
+                  <img
+                    src={p.image}
+                    alt={p.title}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                  {/* Gradient fade into card body */}
+                  <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-[#082433] to-transparent z-20" />
+                </div>
+
+                {/* Card body */}
+                <div className=" flex-col flex-1 p-5 sm:p-6">
+                  <div className={`h-0.5 w-10 rounded-full bg-gradient-to-r ${p.color} mb-4 group-hover:w-full transition-all duration-500`} />
+                  <h3 className="font-['Archivo_Black'] font-bold text-lg sm:text-xl text-white mb-2">{p.title}</h3>
+                  <p className="font-['DM_Sans'] font-light text-gray-400 text-sm leading-relaxed mb-5 flex-1">{p.description}</p>
+                  <div className="flex flex-wrap gap-2">
+                    {p.tags.map(t => (
+                      <span key={t} className={`text-xs font-['DM_Sans'] px-3 py-1 rounded-full bg-gradient-to-r ${p.tagColor} text-white border border-white/10`}>{t}</span>
+                    ))}
+                  </div>
+                </div>
+              </a>
+            ))}
+           
+          </div>
+
+          {/* GitHub CTA */}
+          <div className="flex justify-center">
+            <div className="flex flex-col items-center gap-4 sm:gap-5 p-8 sm:p-10 rounded-3xl border border-sky-700/30 bg-sky-950/20 w-full sm:w-auto">
+              <AiFillGithub className="text-5xl sm:text-6xl text-sky-300" />
+              <div className="text-center">
+                <p className="font-['Archivo_Black'] font-bold text-lg sm:text-xl text-white mb-1">See everything on GitHub</p>
+                <p className="font-['DM_Sans'] text-gray-500 text-sm">More projects, contributions, and experiments</p>
+              </div>
+              <a href="https://github.com/wtrantan" target="_blank" rel="noreferrer"
+                className="inline-flex items-center gap-2 px-6 sm:px-8 py-3 rounded-full font-['Archivo_Black'] font-bold text-sm bg-sky-500 hover:bg-sky-400 text-[#04202d] transition-all duration-200 hover:scale-105 shadow-lg shadow-sky-400/25">
+                View GitHub ↗
+              </a>
+            </div>
+          </div>
+        </div>
+        <div
+  className="absolute pointer-events-none hidden md:block"
+  style={{
+    left: '0%',        // ← move this value, e.g. '-5%' to tuck left edge off screen
+    top: '30%',
+    transform: 'translateY(-50%)',
+    zIndex: 0,
+    width: '520px',
+    animation: 'whaleFloat 7s ease-in-out infinite',
+  }}
+>
+  <img
+    src="/squirtle.png"
+    alt=""
+    style={{
+      width: '100%',
+      opacity: 0.22,
+      filter: 'contrast(1.4) brightness(1.2)',
+      
+    }}
+  />
+</div>
+      </section>
       {/* ── SKILLS SECTION ── */}
-      <section id="skills" name="skills" className="relative py-24 px-4 sm:px-6 border-y border-violet-900/30 overflow-hidden w-full"
-        style={{ background: 'rgba(109,40,217,0.02)' }}>
+      <section id="skills" name="skills" className="relative py-40 px-4 sm:px-6 border-y border-sky-900/30 overflow-hidden w-full"
+        style={{ background: 'rgba(14,116,144,0.05)' }}>
         
         {/* Background Decor */}
         <div className="absolute inset-0 pointer-events-none" style={{
-          backgroundImage: 'radial-gradient(rgba(139,92,246,0.1) 1px, transparent 1px)',
+          backgroundImage: 'radial-gradient(rgba(125,211,252,0.12) 1px, transparent 1px)',
           backgroundSize: '32px 32px'
         }} />
 
         <div className="max-w-5xl mx-auto relative z-10">
           <div className="text-center mb-16">
-            <span className="font-['DM_Sans'] text-xs tracking-[0.3em] uppercase text-violet-400 mb-3 block">Technologies I&apos;ve used so far</span>
-            <h2 className="font-['Syne'] font-extrabold text-4xl sm:text-5xl text-white">Tech Stack</h2>
+            <span className="font-['DM_Sans'] text-xs tracking-[0.3em] uppercase text-sky-300 mb-3 block">Technologies I&apos;ve used so far</span>
+            <h2 className="font-['Archivo_Black'] font-extrabold text-4xl sm:text-5xl text-white">Tech Stack</h2>
           </div>
 
           <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-7 gap-4 sm:gap-6">
@@ -543,128 +756,20 @@ export default function Home() {
         </div>
       </section>
 
-
-
-
-       {/* ── EXPERIENCE ── */}
-      <section id="experience" name="experience" className="relative px-4 sm:px-6 py-24 sm:py-32 w-full">
-        <div className="absolute top-20 right-0 w-64 h-64 rounded-full opacity-10 blur-3xl pointer-events-none"
-          style={{ background: 'radial-gradient(circle, #7c3aed, transparent)' }} />
- 
-        <div className="max-w-3xl mx-auto">
-          <div className="mb-10 sm:mb-16">
-            <span className="font-['DM_Sans'] text-xs tracking-[0.3em] uppercase text-violet-400 mb-3 block">Experience</span>
-            <h2 className="font-['Syne'] font-extrabold text-4xl sm:text-5xl md:text-6xl text-white">Where I&apos;ve worked</h2>
-          </div>
- 
-          {/* Timeline */}
-          <div className="relative">
-            {/* Vertical line */}
-            <div className="absolute left-0 top-0 bottom-0 w-px bg-gradient-to-b from-violet-600 via-violet-800 to-transparent ml-[7px] hidden sm:block" />
- 
-            <div className="flex flex-col gap-10 sm:gap-12">
-              {experience.map((job, i) => (
-                <div key={i} className="group relative flex gap-6 sm:gap-8">
-                  {/* Timeline dot */}
-                  <div className="hidden sm:flex flex-col items-center shrink-0 mt-1">
-                    <div className={`w-4 h-4 rounded-full bg-gradient-to-br ${job.color} ring-4 ring-[#07050f] group-hover:scale-125 transition-transform duration-300`} />
-                  </div>
- 
-                  {/* Card */}
-                  <div className="flex-1 rounded-2xl border border-white/5 hover:border-violet-500/20 bg-white/[0.02] hover:bg-white/[0.03] p-5 sm:p-6 transition-all duration-300 hover:shadow-xl hover:shadow-violet-900/10">
-                    {/* Top accent bar */}
-                    <div className={`h-0.5 w-10 rounded-full bg-gradient-to-r ${job.color} mb-4 group-hover:w-full transition-all duration-500`} />
- 
-                    <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-1 sm:gap-4 mb-1">
-                      <h3 className="font-['Syne'] font-extrabold text-lg sm:text-xl text-white leading-tight">{job.company}</h3>
-                      <span className="font-['DM_Sans'] text-xs text-violet-400 bg-violet-950/50 border border-violet-800/40 px-3 py-1 rounded-full shrink-0 self-start">{job.period}</span>
-                    </div>
- 
-                    <p className={`font-['DM_Sans'] font-medium text-sm bg-gradient-to-r ${job.color} bg-clip-text text-transparent mb-1`}>{job.role}</p>
-                    <p className="font-['DM_Sans'] text-xs text-gray-600 mb-4">{job.location}</p>
- 
-                    <ul className="flex flex-col gap-2">
-                      {job.bullets.map((b, j) => (
-                        <li key={j} className="flex gap-2 items-start">
-                          <span className="text-violet-500 mt-1 shrink-0 text-xs">▹</span>
-                          <span className="font-['DM_Sans'] font-light text-gray-400 text-sm leading-relaxed">{b}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-      {/* ── PROJECTS ── */}
-      <section id="projects" name="projects" className="relative min-h-screen px-4 sm:px-6 py-24 sm:py-32 w-full">
-        <div className="absolute bottom-20 left-0 w-64 sm:w-80 h-64 sm:h-80 rounded-full opacity-10 blur-3xl pointer-events-none"
-          style={{ background: 'radial-gradient(circle, #7c3aed, transparent)' }} />
-
-        <div className="max-w-5xl mx-auto">
-          <div className="mb-10 sm:mb-16">
-            <span className="font-['DM_Sans'] text-xs tracking-[0.3em] uppercase text-violet-400 mb-3 block">Work</span>
-            <h2 className="font-['Syne'] font-extrabold text-4xl sm:text-5xl md:text-6xl text-white">Projects</h2>
-            <p ></p>
-          </div>
-
-         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-10 sm:mb-12">
-            {projects.map((p, i) => (
-              <a key={i} href={p.link} target="_blank" rel="noreferrer"
-                className="group relative rounded-2xl overflow-hidden border border-white/5 hover:border-violet-500/30 bg-white/[0.02] transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-violet-900/20 cursor-pointer flex flex-col">
-
-                {/* Project image */}
-                <div className="relative w-full h-44 sm:h-48 overflow-hidden">
-                  <div className={`absolute inset-0 bg-gradient-to-br ${p.color} opacity-20 z-10`} />
-                  <img
-                    src={p.image}
-                    alt={p.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                  {/* Gradient fade into card body */}
-                  <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-[#0d0a1a] to-transparent z-20" />
-                </div>
-
-                {/* Card body */}
-                <div className=" flex-col flex-1 p-5 sm:p-6">
-                  <div className={`h-0.5 w-10 rounded-full bg-gradient-to-r ${p.color} mb-4 group-hover:w-full transition-all duration-500`} />
-                  <h3 className="font-['Syne'] font-bold text-lg sm:text-xl text-white mb-2">{p.title}</h3>
-                  <p className="font-['DM_Sans'] font-light text-gray-400 text-sm leading-relaxed mb-5 flex-1">{p.description}</p>
-                  <div className="flex flex-wrap gap-2">
-                    {p.tags.map(t => (
-                      <span key={t} className={`text-xs font-['DM_Sans'] px-3 py-1 rounded-full bg-gradient-to-r ${p.color} bg-opacity-10 text-white/70 border border-white/10`}>{t}</span>
-                    ))}
-                  </div>
-                </div>
-              </a>
-            ))}
-          </div>
-
-          {/* GitHub CTA */}
-          <div className="flex justify-center">
-            <div className="flex flex-col items-center gap-4 sm:gap-5 p-8 sm:p-10 rounded-3xl border border-violet-800/30 bg-violet-950/20 w-full sm:w-auto">
-              <AiFillGithub className="text-5xl sm:text-6xl text-violet-400" />
-              <div className="text-center">
-                <p className="font-['Syne'] font-bold text-lg sm:text-xl text-white mb-1">See everything on GitHub</p>
-                <p className="font-['DM_Sans'] text-gray-500 text-sm">More projects, contributions, and experiments</p>
-              </div>
-              <a href="https://github.com/wtrantan" target="_blank" rel="noreferrer"
-                className="inline-flex items-center gap-2 px-6 sm:px-8 py-3 rounded-full font-['Syne'] font-bold text-sm bg-violet-600 hover:bg-violet-500 text-white transition-all duration-200 hover:scale-105 shadow-lg shadow-violet-600/30">
-                View GitHub ↗
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* ── FOOTER ── */}
-     <footer className="border-t border-violet-900/20 py-8 sm:py-10 text-center px-4">
-      <p className="font-['DM_Sans'] text-gray-600 text-xs sm:text-sm">
-    © 2026 William Trantan · Built with Next.js & Tailwind CSS
-   </p>
+     <footer className="relative overflow-hidden border-t border-sky-900/25 pt-14 pb-10 sm:pt-16 sm:pb-12 text-center px-4">
+  
+ 
+  <p className="relative z-10 bottom-4 font-['DM_Sans'] text-sky-100/60 text-xs sm:text-sm">
+    © 2026 William Trantan
+  </p>
 </footer>
+ <style>{`
+@keyframes whaleFloat {
+  0%, 100% { transform: translateY(-50%) translateY(0px)   rotate(-1deg); }
+  50%       { transform: translateY(-50%) translateY(18px)  rotate(1.5deg); }
+}
+ `}</style>
     </div>
   );
 }
