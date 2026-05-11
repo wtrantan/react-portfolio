@@ -528,7 +528,7 @@ const visibleSkills = showAll ? skills : skills.slice(0, MOBILE_LIMIT);
                 things with code. From fun side projects to polished software.
               </p>
               <p className="font-['DM_Sans'] font-light text-gray-400 text-sm sm:text-base leading-relaxed mb-7 sm:mb-8">
-                Outside of engineering I spend time ice skating, watching hockey,
+                Outside of engineering, I spend time ice skating, watching hockey,
                 going hiking, swimming or playing video games. Keeping myself active while away from the computer, besides video games.
               </p>
               <div className="flex flex-wrap gap-2">
