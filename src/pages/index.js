@@ -376,7 +376,7 @@ export default function Home() {
           </h1>
  
           <p className="font-['DM_Sans'] font-light text-gray-400 text-sm sm:text-base md:text-lg max-w-sm sm:max-w-md mx-auto mb-7 sm:mb-8 leading-relaxed">
-            Computer Science student building polished digital experiences.
+            Simply someone building cool digital experiences.
             Passionate about code, hockey, and everything in between.
           </p>
  
