@@ -8,42 +8,117 @@ export default function Home() {
   const [mousePos, setMousePos] = useState({ x: -999, y: -999 });
   const canvasRef = useRef(null);
 
+  
+// NEW: We use a mutable ref for the physics engine to read instantly
+  const physicsMouse = useRef({ x: -999, y: -999 });
+
+  useEffect(() => {
+    // 1. Sync React state (for custom cursor) with Physics Ref (for canvas)
+    const handleMouse = (e) => {
+      setMousePos({ x: e.clientX, y: e.clientY });
+      physicsMouse.current = { x: e.clientX, y: e.clientY };
+    };
+    const handleMouseLeave = () => {
+      physicsMouse.current = { x: -999, y: -999 }; // Move particles off-screen
+    };
+
+    window.addEventListener('mousemove', handleMouse);
+    document.addEventListener('mouseleave', handleMouseLeave);
+
+    return () => {
+      window.removeEventListener('mousemove', handleMouse);
+      document.removeEventListener('mouseleave', handleMouseLeave);
+    };
+  }, []);
+
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
+    
+    // Set explicit dimensions
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 
-    const particles = Array.from({ length: 70 }, () => ({
+    // Create particles with slightly higher density and varied speeds
+    const particles = Array.from({ length: 90 }, () => ({
       x: Math.random() * canvas.width,
       y: Math.random() * canvas.height,
-      r: Math.random() * 1.5 + 0.3,
-      dx: (Math.random() - 0.5) * 0.3,
-      dy: (Math.random() - 0.5) * 0.3,
-      opacity: Math.random() * 0.6 + 0.2,
+      r: Math.random() * 2 + 0.5,
+      dx: (Math.random() - 0.5) * 0.5,
+      dy: (Math.random() - 0.5) * 0.5,
+      opacity: Math.random() * 0.5 + 0.2,
+      baseOpacity: Math.random() * 0.5 + 0.2 // Store base to restore after hover
     }));
 
     let animId;
+    
     function draw() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
+      
+      const mouseX = physicsMouse.current.x;
+      const mouseY = physicsMouse.current.y;
+      const interactionRadius = 150; // How close the mouse needs to be to affect them
+
       particles.forEach(p => {
+        // --- 1. MOUSE INTERACTION PHYSICS ---
+        const dxMouse = mouseX - p.x;
+        const dyMouse = mouseY - p.y;
+        const distMouse = Math.sqrt(dxMouse * dxMouse + dyMouse * dyMouse);
+
+        if (distMouse < interactionRadius) {
+          // Repulsion force: particles push away from the cursor
+          const force = (interactionRadius - distMouse) / interactionRadius;
+          
+          // Push particles away
+          p.x -= (dxMouse / distMouse) * force * 2;
+          p.y -= (dyMouse / distMouse) * force * 2;
+          
+          // Brighten particles when near cursor
+          p.opacity = Math.min(p.baseOpacity + 0.5, 1);
+
+          // Draw "spiderweb" line connecting cursor to particle
+          ctx.beginPath();
+          ctx.moveTo(p.x, p.y);
+          ctx.lineTo(mouseX, mouseY);
+          ctx.strokeStyle = `rgba(167, 139, 250, ${0.2 * (1 - distMouse / interactionRadius)})`;
+          ctx.lineWidth = 1;
+          ctx.stroke();
+        } else {
+          // Gradually return to normal opacity when mouse leaves
+          if (p.opacity > p.baseOpacity) {
+            p.opacity -= 0.01; 
+          }
+        }
+
+        // --- 2. STANDARD MOVEMENT ---
+        p.x += p.dx; 
+        p.y += p.dy;
+
+        // Bounce off walls smoothly
+        if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
+        if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
+
+        // --- 3. DRAW PARTICLE ---
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
         ctx.fillStyle = `rgba(167, 139, 250, ${p.opacity})`;
         ctx.fill();
-        p.x += p.dx; p.y += p.dy;
-        if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
-        if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
       });
+
+      // --- 4. CONNECT NEARBY PARTICLES ---
+      // (Optimized connection logic)
       for (let i = 0; i < particles.length; i++) {
         for (let j = i + 1; j < particles.length; j++) {
-          const dist = Math.hypot(particles[i].x - particles[j].x, particles[i].y - particles[j].y);
-          if (dist < 120) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          
+          if (dist < 100) {
             ctx.beginPath();
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(particles[j].x, particles[j].y);
-            ctx.strokeStyle = `rgba(167, 139, 250, ${0.08 * (1 - dist / 120)})`;
+            ctx.strokeStyle = `rgba(167, 139, 250, ${0.1 * (1 - dist / 100)})`;
             ctx.lineWidth = 0.5;
             ctx.stroke();
           }
@@ -51,30 +126,34 @@ export default function Home() {
       }
       animId = requestAnimationFrame(draw);
     }
+    
     draw();
 
-    const resize = () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; };
+    // Handle Window Resize properly
+    const resize = () => { 
+      canvas.width = window.innerWidth; 
+      canvas.height = window.innerHeight; 
+    };
     window.addEventListener('resize', resize);
-    return () => { cancelAnimationFrame(animId); window.removeEventListener('resize', resize); };
+    
+    return () => { 
+      cancelAnimationFrame(animId); 
+      window.removeEventListener('resize', resize); 
+    };
   }, []);
-
-  useEffect(() => {
-    const handleMouse = (e) => setMousePos({ x: e.clientX, y: e.clientY });
-    window.addEventListener('mousemove', handleMouse);
-    return () => window.removeEventListener('mousemove', handleMouse);
-  }, []);
-
   const skills = [
     { name: 'JavaScript', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg' },
     { name: 'TypeScript', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg' },
     { name: 'Python',     icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg' },
-    { name: 'SQL',        icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg' },
+    { name: 'SQL',        icon: 'https://www.freeiconspng.com/uploads/sql-server-icon-png-29.png' },
     { name: 'SQLite',     icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sqlite/sqlite-original.svg' },
-    { name: 'Flask',      icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flask/flask-original.svg' },
-    { name: 'Git',        icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg' },
+    { name: 'MySQL',      icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg' },
+    { name: 'PostgreSQL', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg' },
+    { name: 'Flask',      icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flask/flask-original.svg', needsInvert: true  },
+    { name: 'Git',        icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg'},
     { name: 'React',      icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg' },
     { name: 'Node.js',    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg' },
-    { name: 'Express',    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg' },
+    { name: 'Express',    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg', needsInvert: true },
     { name: 'Next.js',    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg' },
     { name: 'C++',        icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg' },
     { name: 'C',          icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg' },
@@ -82,7 +161,7 @@ export default function Home() {
     { name: 'Bootstrap',  icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg' },
     { name: 'Tailwind',   icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg' },
     { name: 'Material UI', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/materialui/materialui-original.svg' },
-    { name: 'Three.js',   icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/threejs/threejs-original.svg' },
+    { name: 'Three.js',   icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/threejs/threejs-original.svg', needsInvert: true  },
     { name: 'Docker',     icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg' },
     { name: 'HTML',       icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg' },
     { name: 'CSS',        icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg' },
@@ -92,7 +171,17 @@ export default function Home() {
     { name: 'Flutter',    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg' },
     { name: 'Arduino',    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/arduino/arduino-original.svg' },
     { name: 'Firebase',   icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg' },
-    { name: 'Godot',      icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/godot/godot-plain.svg' },
+    { name: 'Godot',      icon: 'https://godotengine.org/assets/press/icon_color.png' },
+
+    /* --- NEWLY ADDED SKILLS --- */
+  { name: 'FastAPI',    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg' },
+  { name: 'Socket.IO',  icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/socketio/socketio-original.svg', needsInvert: true },
+  { name: 'AWS Bedrock', icon: 'https://www.awsicon.com/static/images/Service-Icons/Artificial-Intelligence/64/png5x/Bedrock.png'},
+  { name: 'AWS S3',     icon: 'https://user-images.githubusercontent.com/15157491/75435753-6929fc80-594b-11ea-9e19-f78223916862.png' },
+  { name: 'Puppeteer',  icon: 'https://www.svgrepo.com/show/354228/puppeteer.svg' },
+  { name: 'Cheerio',    icon: 'https://cheerio.js.org/_astro/orange-c.LpIsIfBH_Z1HYzg2.svg' }, 
+  { name: 'Drei',       icon: 'https://pmndrs.gallerycdn.vsassets.io/extensions/pmndrs/pmndrs/0.3.7/1676328524141/Microsoft.VisualStudio.Services.Icons.Default'}, 
+
   ];
 
 
@@ -240,7 +329,7 @@ export default function Home() {
         style={{ background: 'rgba(7,5,15,0.85)', backdropFilter: 'blur(16px)', borderBottom: '1px solid rgba(139,92,246,0.08)' }}>
         <span className="font-['Syne'] font-extrabold text-lg tracking-widest text-violet-300 uppercase">WT</span>
         <ul className="flex gap-1 sm:gap-2">
-          {['Home', 'About', 'Experience', 'Projects'].map(item => (
+          {['Home', 'About', 'Skills', 'Experience', 'Projects'].map(item => (
             <li key={item}>
               <Link
                 to={item.toLowerCase()}
@@ -337,7 +426,7 @@ export default function Home() {
 
         <div className="max-w-5xl mx-auto w-full">
           <div className="mb-10 sm:mb-16">
-            <span className="font-['DM_Sans'] text-xs tracking-[0.3em] uppercase text-violet-400 mb-3 block">01 — About</span>
+            <span className="font-['DM_Sans'] text-xs tracking-[0.3em] uppercase text-violet-400 mb-3 block">About</span>
             <h2 className="font-['Syne'] font-extrabold text-4xl sm:text-5xl md:text-6xl text-white">Who I am</h2>
           </div>
 
@@ -351,8 +440,8 @@ export default function Home() {
                   <img src="/me.jpg" alt="William" className="w-full h-full object-cover" />
                 </div>
                 <div className="absolute -bottom-3 -right-2 sm:-right-3 bg-[#0d0a1e] border border-violet-500/30 rounded-xl sm:rounded-2xl px-3 sm:px-4 py-2 shadow-xl">
-                  <p className="font-['Syne'] font-bold text-violet-300 text-xs sm:text-sm">CS&amp;E Student</p>
-                  <p className="font-['DM_Sans'] text-gray-500 text-xs">UC Merced</p>
+                  <p className="font-['Syne'] font-bold text-violet-300 text-xs sm:text-sm">Test Engineer</p>
+                  <p className="font-['DM_Sans'] text-gray-500 text-xs">Quanta</p>
                 </div>
               </div>
             </div>
@@ -381,39 +470,40 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── SKILLS GRID ── */}
-      <div className="relative py-16 sm:py-24 px-4 sm:px-6 border-y border-violet-900/30 overflow-hidden w-full"
-        style={{ background: 'rgba(109,40,217,0.04)' }}>
+      {/* ── SKILLS SECTION ── */}
+      <section id="skills" name="skills" className="relative py-24 px-4 sm:px-6 border-y border-violet-900/30 overflow-hidden w-full"
+        style={{ background: 'rgba(109,40,217,0.02)' }}>
+        
+        {/* Background Decor */}
         <div className="absolute inset-0 pointer-events-none" style={{
           backgroundImage: 'radial-gradient(rgba(139,92,246,0.1) 1px, transparent 1px)',
-          backgroundSize: '28px 28px'
+          backgroundSize: '32px 32px'
         }} />
-        <div className="absolute -top-10 -left-10 w-48 sm:w-64 h-48 sm:h-64 rounded-full blur-3xl pointer-events-none opacity-20"
-          style={{ background: 'radial-gradient(circle, #7c3aed, transparent)' }} />
-        <div className="absolute -bottom-10 -right-10 w-48 sm:w-64 h-48 sm:h-64 rounded-full blur-3xl pointer-events-none opacity-20"
-          style={{ background: 'radial-gradient(circle, #4f46e5, transparent)' }} />
 
-        <div className="max-w-4xl mx-auto relative z-10">
-          <p className="font-['DM_Sans'] text-xs tracking-[0.3em] uppercase text-violet-400 mb-8 sm:mb-10 text-center">Tech Stack</p>
-          <div className="flex flex-wrap justify-center gap-2 sm:gap-3 md:gap-4">
-            {skills.map(({ name, icon }) => (
-              <div key={name}
-                className="group relative flex flex-col items-center justify-center gap-1.5 sm:gap-2 w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-xl sm:rounded-2xl cursor-default
-                  border border-violet-800/20 bg-gradient-to-b from-violet-950/40 to-[#07050f]/60
-                  hover:border-violet-500/50 hover:from-violet-900/50 hover:to-violet-950/60
-                  hover:-translate-y-1 sm:hover:-translate-y-2 hover:shadow-xl hover:shadow-violet-700/20
-                  transition-all duration-300">
-                <div className="absolute inset-0 rounded-xl sm:rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                  style={{ background: 'radial-gradient(circle at 50% 40%, rgba(139,92,246,0.15), transparent 70%)' }} />
-                <img src={icon} alt={name} className="w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 object-contain relative z-10 group-hover:scale-110 transition-transform duration-300" />
-                <span className="font-['Syne'] font-bold text-[9px] sm:text-[10px] md:text-xs text-gray-400 group-hover:text-white transition-colors duration-300 relative z-10 tracking-wide text-center px-1 leading-tight">
-                  {name}
-                </span>
-              </div>
-            ))}
+        <div className="max-w-5xl mx-auto relative z-10">
+          <div className="text-center mb-16">
+            <span className="font-['DM_Sans'] text-xs tracking-[0.3em] uppercase text-violet-400 mb-3 block">Technologies I&apos;ve used so far</span>
+            <h2 className="font-['Syne'] font-extrabold text-4xl sm:text-5xl text-white">Tech Stack</h2>
+          </div>
+
+          <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-7 gap-4 sm:gap-6">
+            {skills.map(({ name, icon, needsInvert }) => (
+                <div key={name} className="group ...">
+                  <img 
+                    src={icon} 
+                    alt={name} 
+                    className={`w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 object-contain transition-all duration-300 
+                      ${needsInvert ? 'brightness-0 invert' : ''} 
+                      group-hover:scale-110`} 
+                  />
+                  <span className="...">
+                    {name}
+                  </span>
+                </div>
+              ))}
           </div>
         </div>
-      </div>
+      </section>
 
 
 
@@ -425,7 +515,7 @@ export default function Home() {
  
         <div className="max-w-3xl mx-auto">
           <div className="mb-10 sm:mb-16">
-            <span className="font-['DM_Sans'] text-xs tracking-[0.3em] uppercase text-violet-400 mb-3 block">02 — Experience</span>
+            <span className="font-['DM_Sans'] text-xs tracking-[0.3em] uppercase text-violet-400 mb-3 block">Experience</span>
             <h2 className="font-['Syne'] font-extrabold text-4xl sm:text-5xl md:text-6xl text-white">Where I&apos;ve worked</h2>
           </div>
  
@@ -477,7 +567,7 @@ export default function Home() {
 
         <div className="max-w-5xl mx-auto">
           <div className="mb-10 sm:mb-16">
-            <span className="font-['DM_Sans'] text-xs tracking-[0.3em] uppercase text-violet-400 mb-3 block">02 — Work</span>
+            <span className="font-['DM_Sans'] text-xs tracking-[0.3em] uppercase text-violet-400 mb-3 block">Work</span>
             <h2 className="font-['Syne'] font-extrabold text-4xl sm:text-5xl md:text-6xl text-white">Projects</h2>
           </div>
 
