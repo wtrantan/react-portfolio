@@ -141,6 +141,8 @@ export default function Home() {
       window.removeEventListener('resize', resize); 
     };
   }, []);
+
+  const [menuOpen, setMenuOpen] = useState(false);
   const skills = [
     { name: 'JavaScript', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg' },
     { name: 'TypeScript', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg' },
@@ -325,27 +327,63 @@ export default function Home() {
       <canvas ref={canvasRef} className="fixed inset-0 z-0 pointer-events-none" />
 
       {/* ── NAV ── */}
-      <nav className="fixed top-0 left-0 right-0 z-40 flex items-center justify-between px-4 sm:px-8 py-4"
-        style={{ background: 'rgba(7,5,15,0.85)', backdropFilter: 'blur(16px)', borderBottom: '1px solid rgba(139,92,246,0.08)' }}>
-        <span className="font-['Syne'] font-extrabold text-lg tracking-widest text-violet-300 uppercase">WT</span>
-        <ul className="flex gap-5 sm:gap-2">
-          {['Home', 'About', 'Skills', 'Experience', 'Projects'].map(item => (
-            <li key={item}>
-              <Link
-                to={item.toLowerCase()}
-                spy smooth offset={-72} duration={700}
-                onSetActive={() => setActiveSection(item.toLowerCase())}
-                className={`cursor-pointer px-3 sm:px-5 py-2 rounded-full font-['DM_Sans'] text-xs sm:text-sm font-medium transition-all duration-300
-                  ${activeSection === item.toLowerCase()
-                    ? 'bg-violet-600 text-white shadow-lg shadow-violet-500/30'
-                    : 'text-gray-400 hover:text-white hover:bg-white/5'}`}
-              >
-                {item}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </nav>
+<nav className="fixed top-0 left-0 right-0 z-40"
+  style={{ background: 'rgba(7,5,15,0.85)', backdropFilter: 'blur(16px)', borderBottom: '1px solid rgba(139,92,246,0.08)' }}>
+  <div className="flex items-center justify-between px-4 sm:px-8 py-4">
+    <span className="font-['Syne'] font-extrabold text-lg tracking-widest text-violet-300 uppercase">WT</span>
+
+    {/* Desktop links */}
+    <ul className="hidden md:flex gap-1">
+      {['Home', 'About', 'Skills', 'Experience', 'Projects'].map(item => (
+        <li key={item}>
+          <Link
+            to={item.toLowerCase()}
+            spy smooth offset={-72} duration={700}
+            onSetActive={() => setActiveSection(item.toLowerCase())}
+            className={`cursor-pointer px-4 py-2 rounded-full font-['DM_Sans'] text-sm font-medium transition-all duration-300
+              ${activeSection === item.toLowerCase()
+                ? 'bg-violet-600 text-white shadow-lg shadow-violet-500/30'
+                : 'text-gray-400 hover:text-white hover:bg-white/5'}`}
+          >
+            {item}
+          </Link>
+        </li>
+      ))}
+    </ul>
+
+    {/* Mobile hamburger */}
+    <button
+      className="md:hidden flex flex-col justify-center items-center w-8 h-8 gap-1.5 cursor-pointer"
+      onClick={() => setMenuOpen(prev => !prev)}
+      aria-label="Toggle menu">
+      <span className={`block w-6 h-0.5 bg-violet-300 transition-all duration-300 ${menuOpen ? 'rotate-45 translate-y-2' : ''}`} />
+      <span className={`block w-6 h-0.5 bg-violet-300 transition-all duration-300 ${menuOpen ? 'opacity-0' : ''}`} />
+      <span className={`block w-6 h-0.5 bg-violet-300 transition-all duration-300 ${menuOpen ? '-rotate-45 -translate-y-2' : ''}`} />
+    </button>
+  </div>
+
+  {/* Mobile dropdown */}
+  <div className={`md:hidden overflow-hidden transition-all duration-300 ${menuOpen ? 'max-h-96 pb-4' : 'max-h-0'}`}>
+    <ul className="flex flex-col px-4 gap-1">
+      {['Home', 'About', 'Skills', 'Experience', 'Projects'].map(item => (
+        <li key={item}>
+          <Link
+            to={item.toLowerCase()}
+            spy smooth offset={-72} duration={700}
+            onSetActive={() => setActiveSection(item.toLowerCase())}
+            onClick={() => setMenuOpen(false)}
+            className={`block cursor-pointer px-4 py-3 rounded-xl font-['DM_Sans'] text-sm font-medium transition-all duration-200
+              ${activeSection === item.toLowerCase()
+                ? 'bg-violet-600/20 text-violet-300 border border-violet-600/30'
+                : 'text-gray-400 hover:text-white hover:bg-white/5'}`}
+          >
+            {item}
+          </Link>
+        </li>
+      ))}
+    </ul>
+  </div>
+</nav>
 
       {/* ── HERO ── */}
       <section id="home" name="home" className="relative min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 pt-24 pb-16 w-full box-border">
@@ -622,7 +660,7 @@ export default function Home() {
       </section>
 
       {/* ── FOOTER ── */}
-     <footer className="border-t border-violet-900/20 pt-8 pb-[20vh] sm:pt-10 text-center px-4">
+     <footer className="border-t border-violet-900/20 py-8 sm:py-10 text-center px-4">
       <p className="font-['DM_Sans'] text-gray-600 text-xs sm:text-sm">
     © 2026 William Trantan · Built with Next.js & Tailwind CSS
    </p>
