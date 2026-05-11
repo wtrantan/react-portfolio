@@ -461,10 +461,10 @@ const visibleSkills = showAll ? skills : skills.slice(0, MOBILE_LIMIT);
         </div>
  
         {/* Scroll hint */}
-        <div className="hidden sm:flex absolute bottom-4   left-1/2 -translate-x-1/2 flex-col items-center gap-2 opacity-40">
+        {/* <div className="hidden sm:flex absolute bottom-4   left-1/2 -translate-x-1/2 flex-col items-center gap-2 opacity-40">
   <span className="font-['DM_Sans'] text-xs tracking-widest uppercase text-gray-500">Scroll</span>
   <div className="w-px h-8 bg-gradient-to-b from-sky-300 to-transparent animate-pulse" />
-</div>
+</div> */}
 
         <div
   className="absolute pointer-events-none hidden md:block"
@@ -479,7 +479,7 @@ const visibleSkills = showAll ? skills : skills.slice(0, MOBILE_LIMIT);
   }}
 >
   <img
-    src="/wailord.png"
+    src="/wailord1.png"
     alt=""
     style={{
       width: '100%',
@@ -554,11 +554,11 @@ const visibleSkills = showAll ? skills : skills.slice(0, MOBILE_LIMIT);
   }}
 >
   <img
-    src="/lugia.png"
+    src="/lugia1.png"
     alt=""
     style={{
       width: '100%',
-      opacity: 0.22,
+      opacity: 0.42,
       filter: 'contrast(1.4) brightness(1.2)',
       
     }}
@@ -623,20 +623,20 @@ const visibleSkills = showAll ? skills : skills.slice(0, MOBILE_LIMIT);
          <div
   className="absolute pointer-events-none hidden md:block"
   style={{
-    left: '72%',        // ← move this value, e.g. '-5%' to tuck left edge off screen
+    left: '67%',        // ← move this value, e.g. '-5%' to tuck left edge off screen
     top: '30%',
     transform: 'translateY(-50%)',
     zIndex: 0,
-    width: '520px',
+    width: '720px',
     animation: 'whaleFloat 7s ease-in-out infinite',
   }}
 >
   <img
-    src="/kyogre2.png"
+    src="/kyogre3.png"
     alt=""
     style={{
       width: '100%',
-      opacity: 0.22,
+      opacity: 0.12,
       filter: 'contrast(1.4) brightness(1.2)',
       
     }}
