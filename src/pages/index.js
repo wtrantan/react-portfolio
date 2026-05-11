@@ -458,12 +458,12 @@ export default function Home() {
                 going hiking, swimming or playing video games. Keeping myself active while away from the computer, besides video games.
               </p>
               <div className="flex flex-wrap gap-2">
-                {skills.map(s => (
+                {/* {skills.map(s => (
                   <span key={s.name}
                     className="font-['DM_Sans'] text-xs sm:text-sm px-3 sm:px-4 py-1 sm:py-1.5 rounded-full border border-violet-800/60 text-violet-300 bg-violet-950/30 hover:bg-violet-900/40 hover:border-violet-600/60 transition-all duration-200 cursor-default">
                     {s.name}
                   </span>
-                ))}
+                ))} */}
               </div>
             </div>
           </div>
