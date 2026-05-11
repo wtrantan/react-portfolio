@@ -328,7 +328,7 @@ export default function Home() {
       <nav className="fixed top-0 left-0 right-0 z-40 flex items-center justify-between px-4 sm:px-8 py-4"
         style={{ background: 'rgba(7,5,15,0.85)', backdropFilter: 'blur(16px)', borderBottom: '1px solid rgba(139,92,246,0.08)' }}>
         <span className="font-['Syne'] font-extrabold text-lg tracking-widest text-violet-300 uppercase">WT</span>
-        <ul className="flex gap-1 sm:gap-2">
+        <ul className="flex gap-5 sm:gap-2">
           {['Home', 'About', 'Skills', 'Experience', 'Projects'].map(item => (
             <li key={item}>
               <Link
@@ -379,7 +379,7 @@ export default function Home() {
             Simply someone building cool digital experiences.
             Passionate about code, hockey, and everything in between.
           </p>
- 
+            
           {/* Social links */}
           <div className="flex justify-center gap-2 sm:gap-3 mb-7 sm:mb-8 flex-wrap">
             {[
@@ -454,7 +454,7 @@ export default function Home() {
                 things with code. From fun side projects to polished software.
               </p>
               <p className="font-['DM_Sans'] font-light text-gray-400 text-sm sm:text-base leading-relaxed mb-7 sm:mb-8">
-                Outside of engineering I spend time playing hockey,
+                Outside of engineering I spend time ice skating, watching hockey,
                 going hiking, swimming or playing video games. Keeping myself active while away from the computer, besides video games.
               </p>
               <div className="flex flex-wrap gap-2">
@@ -569,6 +569,7 @@ export default function Home() {
           <div className="mb-10 sm:mb-16">
             <span className="font-['DM_Sans'] text-xs tracking-[0.3em] uppercase text-violet-400 mb-3 block">Work</span>
             <h2 className="font-['Syne'] font-extrabold text-4xl sm:text-5xl md:text-6xl text-white">Projects</h2>
+            <p ></p>
           </div>
 
          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-10 sm:mb-12">
@@ -589,7 +590,7 @@ export default function Home() {
                 </div>
 
                 {/* Card body */}
-                <div className="flex flex-col flex-1 p-5 sm:p-6">
+                <div className=" flex-col flex-1 p-5 sm:p-6">
                   <div className={`h-0.5 w-10 rounded-full bg-gradient-to-r ${p.color} mb-4 group-hover:w-full transition-all duration-500`} />
                   <h3 className="font-['Syne'] font-bold text-lg sm:text-xl text-white mb-2">{p.title}</h3>
                   <p className="font-['DM_Sans'] font-light text-gray-400 text-sm leading-relaxed mb-5 flex-1">{p.description}</p>
@@ -621,11 +622,11 @@ export default function Home() {
       </section>
 
       {/* ── FOOTER ── */}
-      <footer className="border-t border-violet-900/20 py-8 sm:py-10 text-center px-4">
-        <p className="font-['DM_Sans'] text-gray-600 text-xs sm:text-sm">
-          © 2024 William Trantan · Built with Next.js & Tailwind CSS
-        </p>
-      </footer>
+     <footer className="border-t border-violet-900/20 pt-8 pb-[20vh] sm:pt-10 text-center px-4">
+      <p className="font-['DM_Sans'] text-gray-600 text-xs sm:text-sm">
+    © 2026 William Trantan · Built with Next.js & Tailwind CSS
+   </p>
+</footer>
     </div>
   );
 }
