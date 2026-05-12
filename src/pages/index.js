@@ -298,11 +298,11 @@ const skills = [
       <Head>
         <title>William Trantan — Portfolio</title>
         <meta name="google-site-verification" content="google-site-verification=apAeanNEg0W0UhOKRViX7ROlm-zTqCZA4n-CoLWobM4" />
-        <meta name="description" content="William Trantan — CS Student & Developer" />
+        <meta name="description" content="William Trantan — Test Engineer & Developer" />
 
         {/* Open Graph properties */}
         <meta property="og:title" content="William Trantan — Portfolio" />
-        <meta property="og:description" content="William Trantan — CS Student & Developer" />
+        <meta property="og:description" content="William Trantan — Test Engineer & Developer" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://williamtrantan.com" />
         <meta property="og:image" content="https://williamtrantan.com/OG_image.png" />
