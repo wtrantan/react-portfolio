@@ -489,10 +489,20 @@ const visibleSkills = showAll ? skills : skills.slice(0, MOBILE_LIMIT);
     }}
   />
 </div>
+        {/* Lugia — centered at the hero/about seam */}
+        <div className="absolute bottom-0 left-0 right-0 flex justify-center pointer-events-none lugia-float" style={{ zIndex: 0 }}>
+          <img
+            src="/lugia1.png"
+            alt=""
+            className="lugia-img"
+            style={{
+              opacity: 0.42,
+              filter: 'contrast(1.4) brightness(1.2)',
+            }}
+          />
+        </div>
       </section>
 
-      
-      
       {/* ── ABOUT ── */}
       <section id="about" name="about" className="relative min-h-screen flex items-center px-4 sm:px-6 py-24 sm:py-32 w-full">
         <div className="absolute top-20 right-0 w-48 sm:w-72 h-48 sm:h-72 rounded-full opacity-10 blur-3xl pointer-events-none"
@@ -542,28 +552,6 @@ const visibleSkills = showAll ? skills : skills.slice(0, MOBILE_LIMIT);
             </div>
           </div>
         </div>
-        <div
-  className="absolute pointer-events-none hidden md:block"
-  style={{
-    left: '-5%',        // ← move this value, e.g. '-5%' to tuck left edge off screen
-    top: '70%',
-    transform: 'translateY(-50%)',
-    zIndex: 0,
-    width: '820px',
-    animation: 'whaleFloat 7s ease-in-out infinite',
-  }}
->
-  <img
-    src="/lugia1.png"
-    alt=""
-    style={{
-      width: '100%',
-      opacity: 0.42,
-      filter: 'contrast(1.4) brightness(1.2)',
-      
-    }}
-  />
-</div>
       </section>
 
 
@@ -806,12 +794,6 @@ const visibleSkills = showAll ? skills : skills.slice(0, MOBILE_LIMIT);
     © 2026 William Trantan
   </p>
 </footer>
- <style>{`
-@keyframes whaleFloat {
-  0%, 100% { transform: translateY(-50%) translateY(0px)   rotate(-1deg); }
-  50%       { transform: translateY(-50%) translateY(18px)  rotate(1.5deg); }
-}
- `}</style>
     </div>
   );
 }
