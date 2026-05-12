@@ -307,6 +307,8 @@ const skills = [
         <meta property="og:url" content="https://williamtrantan.com" />
         <meta property="og:image" content="https://williamtrantan.com/OG_image.png" />
 
+        <meta name="twitter:card" content="summary_large_image" />
+        
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
         <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
