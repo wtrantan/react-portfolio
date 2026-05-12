@@ -690,7 +690,7 @@ export default function Home() {
     
     <div className="text-center mb-10 sm:mb-16">
       <span className="font-['DM_Sans'] text-xs tracking-[0.3em] uppercase text-sky-300 mb-3 block">
-        Technologies I've used so far
+        Technologies I&apos;ve used so far
       </span>
       <h2 className="font-['Archivo_Black'] font-extrabold text-3xl sm:text-4xl md:text-5xl text-white">
         Tech Stack
