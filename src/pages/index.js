@@ -118,11 +118,15 @@ export default function Home() {
   }, []);
 
   const [menuOpen, setMenuOpen] = useState(false);
-  const skills = [
+ const skillCategories = [
+
+  {
+  label: 'All',
+    skills: [
     { name: 'JavaScript', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg' },
     { name: 'TypeScript', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg' },
     { name: 'Python',     icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg' },
-    { name: 'SQL',        icon: 'https://www.freeiconspng.com/uploads/sql-server-icon-png-29.png' },
+    { name: 'SQL',        icon: '/skills/sql.svg', needsInvert: true },
     { name: 'SQLite',     icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sqlite/sqlite-original.svg' },
     { name: 'MySQL',      icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg' },
     { name: 'PostgreSQL', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg' },
@@ -132,9 +136,9 @@ export default function Home() {
     { name: 'Node.js',    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg' },
     { name: 'Express',    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg', needsInvert: true },
     { name: 'Next.js',    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg' },
-    { name: 'C++',        icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg' },
-    { name: 'C',          icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg' },
-    { name: 'RESTful API', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg' },
+    { name: 'C++',        icon: '/skills/C++.svg' },
+    { name: 'C',          icon: '/skills/C.svg' },
+    { name: 'RESTful API', icon: 'https://img.icons8.com/?size=50&id=21888&format=png', needsInvert: true   },
     { name: 'Bootstrap',  icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg' },
     { name: 'Tailwind',   icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg' },
     { name: 'Material UI', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/materialui/materialui-original.svg' },
@@ -156,7 +160,73 @@ export default function Home() {
     { name: 'Puppeteer',  icon: 'https://www.svgrepo.com/show/354228/puppeteer.svg' },
     { name: 'Cheerio',    icon: 'https://cheerio.js.org/_astro/orange-c.LpIsIfBH_Z1HYzg2.svg' }, 
     { name: 'Drei',       icon: 'https://pmndrs.gallerycdn.vsassets.io/extensions/pmndrs/pmndrs/0.3.7/1676328524141/Microsoft.VisualStudio.Services.Icons.Default'}, 
-  ];
+    ],
+  },
+  {
+
+    
+    label: 'Languages',
+    skills: [
+      { name: 'JavaScript', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg' },
+      { name: 'TypeScript', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg' },
+      { name: 'Python',     icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg' },
+      { name: 'SQL',        icon: '/skills/sql.svg', needsInvert: true },
+      { name: 'C++',        icon: '/skills/C++.svg' },
+      { name: 'C',          icon: '/skills/C.svg' },
+      { name: 'Java',       icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg' },
+      { name: 'Dart',       icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dart/dart-original.svg' },
+    ],
+  },
+  {
+    label: 'Frontend',
+    skills: [
+      { name: 'React',      icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg' },
+      { name: 'Next.js',    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg' },
+      { name: 'HTML',       icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg' },
+      { name: 'CSS',        icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg' },
+      { name: 'Bootstrap',  icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg' },
+      { name: 'Tailwind',   icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg' },
+      { name: 'Material UI', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/materialui/materialui-original.svg' },
+      { name: 'Three.js',   icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/threejs/threejs-original.svg', needsInvert: true },
+      { name: 'Flutter',    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg' },
+    ],
+  },
+  {
+    label: 'Backend',
+    skills: [
+      { name: 'Node.js',    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg' },
+      { name: 'Express',    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg', needsInvert: true },
+      { name: 'Flask',      icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flask/flask-original.svg',   needsInvert: true },
+      { name: 'FastAPI',    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg' },
+      {name: 'RESTful API', icon: 'https://img.icons8.com/?size=50&id=21888&format=png', needsInvert: true   },
+      { name: 'Socket.IO',  icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/socketio/socketio-original.svg', needsInvert: true },
+      { name: 'SQLite',     icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sqlite/sqlite-original.svg' },
+      { name: 'MySQL',      icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg' },
+      { name: 'PostgreSQL', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg' },
+      { name: 'MongoDB',    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg' },
+    ],
+  },
+  {
+    label: 'DevOps & Cloud',
+    skills: [
+      { name: 'Git',         icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg' },
+      { name: 'Docker',      icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg' },
+      { name: 'Firebase',    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg' },
+      { name: 'AWS Bedrock', icon: 'https://www.awsicon.com/static/images/Service-Icons/Artificial-Intelligence/64/png5x/Bedrock.png' },
+      { name: 'AWS S3',      icon: 'https://user-images.githubusercontent.com/15157491/75435753-6929fc80-594b-11ea-9e19-f78223916862.png' },
+    ],
+  },
+  {
+    label: 'Other',
+    skills: [
+      { name: 'Godot',      icon: 'https://godotengine.org/assets/press/icon_color.png' },
+      { name: 'Arduino',    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/arduino/arduino-original.svg' },
+      { name: 'Puppeteer',  icon: 'https://www.svgrepo.com/show/354228/puppeteer.svg' },
+      { name: 'Cheerio',    icon: 'https://cheerio.js.org/_astro/orange-c.LpIsIfBH_Z1HYzg2.svg' },
+      { name: 'Drei',       icon: 'https://pmndrs.gallerycdn.vsassets.io/extensions/pmndrs/pmndrs/0.3.7/1676328524141/Microsoft.VisualStudio.Services.Icons.Default' },
+    ],
+  },
+];
 
   const experience = [
     {
@@ -266,9 +336,11 @@ export default function Home() {
     },
   ];
 
-  const [showAll, setShowAll] = useState(false);
+  
   const MOBILE_LIMIT = 12;
-  const visibleSkills = showAll ? skills : skills.slice(0, MOBILE_LIMIT);
+ 
+  const [showAll, setShowAll] = useState(false);
+  const [activeCategory, setActiveCategory] = useState('All');
 
   return (
     <div className="bg-[#061923] text-white font-sans overflow-x-hidden w-full">
@@ -675,7 +747,7 @@ export default function Home() {
 <section
   id="skills"
   name="skills"
-  className="relative min-h-screen flex flex-col justify-center items-center py-20 sm:py-32 px-4 sm:px-6 border-y border-sky-900/30 overflow-hidden w-full"
+  className="relative min-h-screen flex flex-col items-center py-20 sm:py-32 px-4 sm:px-6 border-y border-sky-900/30 overflow-hidden w-full"
   style={{ background: 'rgba(14,116,144,0.05)' }}
 >
   <div
@@ -687,9 +759,9 @@ export default function Home() {
   />
 
   <div className="max-w-5xl w-full mx-auto relative z-10">
-    
-    
-    <div className="text-center mb-10 sm:mb-16">
+
+    {/* Header */}
+    <div className="text-center mb-10 sm:mb-12">
       <span className="font-['DM_Sans'] text-xs tracking-[0.3em] uppercase text-sky-300 mb-3 block">
         Technologies I&apos;ve used so far
       </span>
@@ -698,14 +770,37 @@ export default function Home() {
       </h2>
     </div>
 
-   {/* Desktop Grid (Hidden on Mobile & Tablet, Shows only on Laptops lg+) */}
-<div className="hidden lg:grid lg:grid-cols-10 gap-y-10 gap-x-6 2xl:gap-y-14 2xl:gap-x-8">
-  {skills.map(({ name, icon, needsInvert }) => (
-    <div key={name} className="group flex flex-col items-center gap-2 2xl:gap-3">
+    {/* Category Tabs */}
+    <div className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-10 sm:mb-14">
+      {skillCategories.map(({ label }) => (
+        <button
+          key={label}
+          onClick={() => setActiveCategory(label)}
+          className={`font-['DM_Sans'] text-xs sm:text-sm tracking-[0.15em] uppercase px-4 sm:px-5 py-2 rounded-full border transition-all duration-300
+            ${activeCategory === label
+              ? 'bg-sky-500/20 border-sky-400 text-white'
+              : 'border-sky-900/50 text-gray-400 hover:border-sky-700 hover:text-sky-300'
+            }`}
+        >
+          {label}
+        </button>
+      ))}
+    </div>
+
+    {/* Active category skills — Desktop */}
+    {skillCategories
+      .filter(({ label }) => label === activeCategory)
+      .map(({ label, skills: catSkills }) => (
+        <div key={label}>
+
+          {/* Desktop Grid */}
+          <div className="hidden lg:flex lg:flex-wrap justify-center gap-x-8 gap-y-10 2xl:gap-x-10 2xl:gap-y-14">
+  {catSkills.map(({ name, icon, needsInvert }) => (
+    <div key={name} className="group flex flex-col items-center gap-2 2xl:gap-3 w-16 2xl:w-20">
       <img
         src={icon}
         alt={name}
-        className={`w-12 h-14 lg:w-16 lg:h-12 2xl:w-16 2xl:h-12 object-contain transition-all duration-300
+        className={`w-12 h-12 lg:w-14 lg:h-14 object-contain transition-all duration-300
           ${needsInvert ? 'brightness-0 invert' : ''}
           group-hover:scale-110 group-hover:-translate-y-1`}
       />
@@ -716,16 +811,15 @@ export default function Home() {
   ))}
 </div>
 
-{/* Mobile & Tablet Grid (Shows up to 'lg', includes the Show All button) */}
+          {/* Mobile & Tablet Grid */}
 <div className="lg:hidden w-full">
-  <div className="grid grid-cols-4 sm:grid-cols-5 md:grid-cols-6 gap-y-8 gap-x-3 sm:gap-x-6">
-    {visibleSkills.map(({ name, icon, needsInvert }) => (
+  <div className="grid grid-cols-4 sm:grid-cols-5 md:grid-cols-6 gap-y-8 gap-x-3 sm:gap-x-6 justify-items-center">
+    {(activeCategory === 'All' && !showAll ? catSkills.slice(0, MOBILE_LIMIT) : catSkills).map(({ name, icon, needsInvert }) => (
       <div key={name} className="group flex flex-col items-center gap-1.5 sm:gap-2">
         <img
           src={icon}
           alt={name}
-          // Added sm and md scaling so tablet icons are slightly larger than phone icons
-          className={`justify-center w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 object-contain transition-all duration-300
+          className={`w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 object-contain transition-all duration-300
             ${needsInvert ? 'brightness-0 invert' : ''}
             group-hover:scale-110 group-hover:-translate-y-1`}
         />
@@ -736,18 +830,21 @@ export default function Home() {
     ))}
   </div>
 
-  {/* Show All / Show Less Button */}
-  {skills.length > MOBILE_LIMIT && (
+  {/* Show All / Show Less — only on the All tab */}
+  {activeCategory === 'All' && catSkills.length > MOBILE_LIMIT && (
     <div className="text-center mt-10 sm:mt-12">
       <button
         onClick={() => setShowAll(prev => !prev)}
         className="font-['DM_Sans'] text-xs sm:text-sm tracking-[0.2em] uppercase text-sky-300 border border-sky-700/50 rounded-full px-5 sm:px-6 py-2.5 sm:py-3 hover:bg-sky-900/30 transition-all duration-300 hover:border-sky-400 hover:text-white"
       >
-        {showAll ? 'Show less ↑' : `Show all ${skills.length} ↓`}
+        {showAll ? 'Show less ↑' : `Show all ${catSkills.length} ↓`}
       </button>
     </div>
   )}
 </div>
+
+        </div>
+      ))}
 
   </div>
 </section>
