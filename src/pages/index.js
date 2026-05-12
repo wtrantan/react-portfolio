@@ -188,6 +188,7 @@ export default function Home() {
       { name: 'Tailwind',   icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg' },
       { name: 'Material UI', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/materialui/materialui-original.svg' },
       { name: 'Three.js',   icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/threejs/threejs-original.svg', needsInvert: true },
+      { name: 'Drei',       icon: 'https://pmndrs.gallerycdn.vsassets.io/extensions/pmndrs/pmndrs/0.3.7/1676328524141/Microsoft.VisualStudio.Services.Icons.Default' },
       { name: 'Flutter',    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg' },
     ],
   },
@@ -223,7 +224,7 @@ export default function Home() {
       { name: 'Arduino',    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/arduino/arduino-original.svg' },
       { name: 'Puppeteer',  icon: 'https://www.svgrepo.com/show/354228/puppeteer.svg' },
       { name: 'Cheerio',    icon: 'https://cheerio.js.org/_astro/orange-c.LpIsIfBH_Z1HYzg2.svg' },
-      { name: 'Drei',       icon: 'https://pmndrs.gallerycdn.vsassets.io/extensions/pmndrs/pmndrs/0.3.7/1676328524141/Microsoft.VisualStudio.Services.Icons.Default' },
+      
     ],
   },
 ];
