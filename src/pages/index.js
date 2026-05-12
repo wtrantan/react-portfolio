@@ -506,13 +506,13 @@ export default function Home() {
             {/* Text */}
             <div className="mt-10 lg:mt-0">
               <p className="font-['DM_Sans'] font-light text-gray-300 text-base sm:text-lg leading-relaxed mb-5 sm:mb-6">
-                Born in <span className="text-sky-200 font-medium">Minnesota</span>, raised in <span className="text-sky-200 font-medium">San Jose</span>.
-                I graduated with a Bachelor&apos;s in CSE at UC Merced, driven by a lifelong passion for building
-                things with code. From fun side projects to polished software.
+                  Born in <span className="text-sky-200 font-medium">Minnesota</span>, raised in <span className="text-sky-200 font-medium">San Jose</span>.
+                  I graduated from UC Merced with a B.S. in Computer Science & Engineering, driven by a lifelong passion for building
+                  things with code. I&apos;m passionate about software development and always seeking opportunities to grow as a programmer, whether through fun side projects or building polished software. Ultimately, I aim to create work that bridges the gap between humans and technology.
               </p>
               <p className="font-['DM_Sans'] font-light text-gray-400 text-sm sm:text-base leading-relaxed mb-7 sm:mb-8">
                 Outside of engineering, I spend time ice skating, watching hockey,
-                going hiking, swimming or playing video games. Keeping myself active while away from the computer, besides video games.
+                going hiking, swimming or playing video games. I Make sure to keep myself active and healthy while away from the computer.
               </p>
               <div className="flex flex-wrap gap-2"></div>
             </div>
