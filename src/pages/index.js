@@ -1,5 +1,4 @@
 import Head from 'next/head'
-import Image from 'next/image'
 import { AiFillLinkedin, AiFillGithub, AiFillInstagram } from 'react-icons/ai';
 import { useState, useEffect, useRef } from "react";
 import { Link } from 'react-scroll';
@@ -347,6 +346,7 @@ export default function Home() {
     <div className="bg-[#061923] text-white font-sans overflow-x-hidden w-full">
       <Head>
         <title>William Trantan — Portfolio</title>
+        <meta name="google-site-verification" content="google-site-verification=apAeanNEg0W0UhOKRViX7ROlm-zTqCZA4n-CoLWobM4" />
         <meta name="description" content="William Trantan — CS Student & Developer" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
