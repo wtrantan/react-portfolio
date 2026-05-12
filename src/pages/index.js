@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import Image from 'next/image'
 import { AiFillLinkedin, AiFillGithub, AiFillInstagram } from 'react-icons/ai';
 import { useState, useEffect, useRef } from "react";
 import { Link } from 'react-scroll';
@@ -68,7 +69,7 @@ export default function Home() {
 
           ctx.beginPath();
           ctx.moveTo(p.x, p.y);
-          ctx.lineTo(mouseX, mouseY);
+          
           ctx.strokeStyle = `rgba(125, 211, 252, ${0.2 * (1 - distMouse / interactionRadius)})`;
           ctx.lineWidth = 1;
           ctx.stroke();
@@ -96,14 +97,7 @@ export default function Home() {
           const dy = particles[i].y - particles[j].y;
           const dist = Math.sqrt(dx * dx + dy * dy);
           
-          if (dist < 100) {
-            ctx.beginPath();
-            ctx.moveTo(particles[i].x, particles[i].y);
-            ctx.lineTo(particles[j].x, particles[j].y);
-            ctx.strokeStyle = `rgba(125, 211, 252, ${0.1 * (1 - dist / 100)})`;
-            ctx.lineWidth = 0.5;
-            ctx.stroke();
-          }
+         
         }
       }
       animId = requestAnimationFrame(draw);
@@ -273,7 +267,7 @@ export default function Home() {
   ];
 
   const [showAll, setShowAll] = useState(false);
-  const MOBILE_LIMIT = 8;
+  const MOBILE_LIMIT = 12;
   const visibleSkills = showAll ? skills : skills.slice(0, MOBILE_LIMIT);
 
   return (
@@ -434,27 +428,49 @@ export default function Home() {
         </div>
 
         <div
-          className="absolute pointer-events-none hidden md:block"
-          style={{
-            left: '55%',
-            top: '40%',
-            transform: 'translateY(-50%)',
-            zIndex: 0,
-            width: '820px',
-            animation: 'whaleFloat 7s ease-in-out infinite',
-          }}
-        >
-          <img
-            src="/wailord1.png"
-            alt=""
-            style={{
-              width: '100%',
-              opacity: 0.22,
-              transform: 'rotate(15deg)',
-              filter: 'contrast(1.4) brightness(1.2)',
-            }}
-          />
-        </div>
+  className="absolute pointer-events-none md:-left-12 lg:left-[25%] xl:left-[55%]"
+  style={{
+    top: '40%',
+    transform: 'translateY(-50%)',
+    zIndex: 0,
+    width: '820px',
+    animation: 'whaleFloat 7s ease-in-out infinite',
+  }}
+>
+  <img
+    src="/wailord1.png"
+    alt="Wailord"
+    style={{
+      transform:'rotate(15deg)',
+      width: '100%',
+      opacity: 0.32,
+      filter: 'contrast(1.4) brightness(1.2) drop-shadow(0 0 5px rgba(255, 255, 255, 0.8)) drop-shadow(0 0 12px rgba(94, 234, 212, 0.4)) drop-shadow(0 0 40px rgba(125, 211, 252, 0.5))',
+    }}
+  />
+</div>
+{/* Lugia and Flanking Lines */}
+<div className="absolute bottom-0 left-0 right-0 flex items-center justify-center pointer-events-none" style={{ zIndex: 0 }}>
+  
+  {/* Left Line — Uses custom responsive offset */}
+  <div className="flex-1 h-px bg-gradient-to-r from-transparent via-sky-400/25 to-sky-400/10 ml-8 sm:ml-24 lugia-line-offset" />
+
+  {/* Centered Lugia Container */}
+  <div className="relative lugia-float flex-shrink-0 px-4">
+    <img
+      src="/lugia1.png"
+      alt="Lugia"
+      className="lugia-img"
+      style={{
+        opacity: 0.42,
+        filter: 'contrast(1.4) brightness(1.2) drop-shadow(0 0 5px rgba(255, 255, 255, 0.8)) drop-shadow(0 0 12px rgba(94, 234, 212, 0.4)) drop-shadow(0 0 40px rgba(125, 211, 252, 0.5))',
+      }}
+    />
+  </div>
+
+  {/* Right Line — Uses custom responsive offset */}
+  <div className="flex-1 h-px bg-gradient-to-l from-transparent via-sky-400/25 to-sky-400/10 mr-8 sm:mr-24 lugia-line-offset" />
+  
+</div>
       </section>
 
     
@@ -567,8 +583,9 @@ export default function Home() {
             alt=""
             style={{
               width: '100%',
-              opacity: 0.12,
-              filter: 'contrast(1.4) brightness(1.2)',
+              opacity: 0.22,
+              filter: `contrast(1.4) brightness(1.2) drop-shadow(0 0 4px rgba(255, 180, 200, 0.9)) drop-shadow(0 0 15px rgba(220, 38, 38, 0.7)) drop-shadow(0 0 45px rgba(124, 58, 237, 0.5)) drop-shadow(0 0 100px rgba(14, 165, 233, 0.3))
+              `,
             }}
           />
         </div>
@@ -647,88 +664,107 @@ export default function Home() {
             style={{
               width: '100%',
               opacity: 0.22,
-              filter: 'contrast(1.4) brightness(1.2)',
+              filter: 'contrast(1.4) brightness(1.2) drop-shadow(0 0 5px rgba(255, 255, 255, 0.8)) drop-shadow(0 0 12px rgba(94, 234, 212, 0.4)) drop-shadow(0 0 40px rgba(125, 211, 252, 0.5))',
             }}
           />
         </div>
       </section>
 
-      {/* ── SKILLS SECTION ── */}
-      <section
-        id="skills"
-        name="skills"
-        className="relative py-20 sm:py-40 px-4 sm:px-6 border-y border-sky-900/30 overflow-hidden w-full"
-        style={{ background: 'rgba(14,116,144,0.05)' }}
-      >
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            backgroundImage: 'radial-gradient(rgba(125,211,252,0.12) 1px, transparent 1px)',
-            backgroundSize: '32px 32px',
-          }}
+  {/* ── SKILLS SECTION ── */}
+<section
+  id="skills"
+  name="skills"
+  className="relative min-h-screen flex flex-col justify-center items-center py-20 sm:py-32 px-4 sm:px-6 border-y border-sky-900/30 overflow-hidden w-full"
+  style={{ background: 'rgba(14,116,144,0.05)' }}
+>
+  <div
+    className="absolute inset-0 pointer-events-none"
+    style={{
+      backgroundImage: 'radial-gradient(rgba(125,211,252,0.12) 1px, transparent 1px)',
+      backgroundSize: '32px 32px',
+    }}
+  />
+
+  <div className="max-w-5xl w-full mx-auto relative z-10">
+    
+    
+    <div className="text-center mb-10 sm:mb-16">
+      <span className="font-['DM_Sans'] text-xs tracking-[0.3em] uppercase text-sky-300 mb-3 block">
+        Technologies I've used so far
+      </span>
+      <h2 className="font-['Archivo_Black'] font-extrabold text-3xl sm:text-4xl md:text-5xl text-white">
+        Tech Stack
+      </h2>
+    </div>
+
+   {/* Desktop Grid (Hidden on Mobile & Tablet, Shows only on Laptops lg+) */}
+<div className="hidden lg:grid lg:grid-cols-10 gap-y-10 gap-x-6 2xl:gap-y-14 2xl:gap-x-8">
+  {skills.map(({ name, icon, needsInvert }) => (
+    <div key={name} className="group flex flex-col items-center gap-2 2xl:gap-3">
+      <img
+        src={icon}
+        alt={name}
+        className={`w-12 h-14 lg:w-16 lg:h-12 2xl:w-16 2xl:h-12 object-contain transition-all duration-300
+          ${needsInvert ? 'brightness-0 invert' : ''}
+          group-hover:scale-110 group-hover:-translate-y-1`}
+      />
+      <span className="font-['DM_Sans'] text-xs 2xl:text-sm text-gray-400 text-center transition-colors duration-300 group-hover:text-sky-300">
+        {name}
+      </span>
+    </div>
+  ))}
+</div>
+
+{/* Mobile & Tablet Grid (Shows up to 'lg', includes the Show All button) */}
+<div className="lg:hidden w-full">
+  <div className="grid grid-cols-4 sm:grid-cols-5 md:grid-cols-6 gap-y-8 gap-x-3 sm:gap-x-6">
+    {visibleSkills.map(({ name, icon, needsInvert }) => (
+      <div key={name} className="group flex flex-col items-center gap-1.5 sm:gap-2">
+        <img
+          src={icon}
+          alt={name}
+          // Added sm and md scaling so tablet icons are slightly larger than phone icons
+          className={`justify-center w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 object-contain transition-all duration-300
+            ${needsInvert ? 'brightness-0 invert' : ''}
+            group-hover:scale-110 group-hover:-translate-y-1`}
         />
+        <span className="font-['DM_Sans'] text-[10px] sm:text-xs text-gray-400 text-center transition-colors duration-300 group-hover:text-sky-300">
+          {name}
+        </span>
+      </div>
+    ))}
+  </div>
 
-        <div className="max-w-5xl mx-auto relative z-10">
-          <div className="text-center mb-10 sm:mb-16">
-            <span className="font-['DM_Sans'] text-xs tracking-[0.3em] uppercase text-sky-300 mb-3 block">
-              Technologies I&apos;ve used so far
-            </span>
-            <h2 className="font-['Archivo_Black'] font-extrabold text-3xl sm:text-4xl md:text-5xl text-white">
-              Tech Stack
-            </h2>
-          </div>
+  {/* Show All / Show Less Button */}
+  {skills.length > MOBILE_LIMIT && (
+    <div className="text-center mt-10 sm:mt-12">
+      <button
+        onClick={() => setShowAll(prev => !prev)}
+        className="font-['DM_Sans'] text-xs sm:text-sm tracking-[0.2em] uppercase text-sky-300 border border-sky-700/50 rounded-full px-5 sm:px-6 py-2.5 sm:py-3 hover:bg-sky-900/30 transition-all duration-300 hover:border-sky-400 hover:text-white"
+      >
+        {showAll ? 'Show less ↑' : `Show all ${skills.length} ↓`}
+      </button>
+    </div>
+  )}
+</div>
 
-          <div className="hidden sm:grid sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-7 gap-6">
-            {skills.map(({ name, icon, needsInvert }) => (
-              <div key={name} className="group flex flex-col items-center gap-2">
-                <img
-                  src={icon}
-                  alt={name}
-                  className={`w-8 h-8 md:w-9 md:h-9 object-contain transition-all duration-300
-                    ${needsInvert ? 'brightness-0 invert' : ''}
-                    group-hover:scale-110`}
-                />
-                <span className="font-['DM_Sans'] text-xs text-gray-400 text-center">{name}</span>
-              </div>
-            ))}
-          </div>
-
-          <div className="sm:hidden">
-            <div className="grid grid-cols-4 gap-3">
-              {visibleSkills.map(({ name, icon, needsInvert }) => (
-                <div key={name} className="group flex flex-col items-center gap-1.5">
-                  <img
-                    src={icon}
-                    alt={name}
-                    className={`justify-center w-7 h-7 object-contain transition-all duration-300
-                      ${needsInvert ? 'brightness-0 invert' : ''}
-                      group-hover:scale-110`}
-                  />
-                  <span className="font-['DM_Sans'] text-[10px] text-gray-400 text-center">{name}</span>
-                </div>
-              ))}
-            </div>
-
-            {skills.length > MOBILE_LIMIT && (
-              <div className="text-center mt-6">
-                <button
-                  onClick={() => setShowAll(prev => !prev)}
-                  className="font-['DM_Sans'] text-xs tracking-[0.2em] uppercase text-sky-300 border border-sky-700 rounded-full px-5 py-2 hover:bg-sky-900/30 transition-colors"
-                >
-                  {showAll ? 'Show less ↑' : `Show all ${skills.length} ↓`}
-                </button>
-              </div>
-            )}
-          </div>
-        </div>
-      </section>
+  </div>
+</section>
 
       {/* ── FOOTER ── */}
       <footer className="relative overflow-hidden border-t border-sky-900/25 pt-14 pb-10 sm:pt-16 sm:pb-12 text-center px-4">
-        <p className="relative z-10 bottom-4 font-['DM_Sans'] text-sky-100/60 text-xs sm:text-sm">
-          © 2026 William Trantan
-        </p>
-      </footer>
+  <div className="relative z-10 flex flex-col items-center gap-2">
+    <p className="font-['DM_Sans'] text-sky-100/60 text-xs sm:text-sm">
+      © 2026 William Trantan
+    </p>
+    
+    <p className="font-['DM_Sans'] text-sky-100/40 text-[10px] sm:text-xs max-w-2xl leading-relaxed">
+      Lugia art by <a href="https://www.redbubble.com/shop/ap/128560162" target="_blank" rel="noopener noreferrer" className="hover:text-sky-200 transition-colors underline decoration-sky-900">DarkIndigo</a> • 
+      Kyogre art by <a href="https://www.pixiv.net/en/users/26820771/artworks" target="_blank" rel="noopener noreferrer" className="hover:text-sky-200 transition-colors underline decoration-sky-900">Tanami</a> • 
+      Wailord & Squirtle art by unknown (via Pinterest)
+    </p>
+  </div>
+</footer>
 
       <style>{`
         @keyframes whaleFloat {

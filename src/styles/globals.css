@@ -32,3 +32,74 @@ a {
   }
 }
 
+@keyframes whaleFloat {
+  0%, 100% { transform: translateY(-50%) translateY(0px) rotate(-1deg); }
+  50%       { transform: translateY(-50%) translateY(18px) rotate(1.5deg); }
+}
+
+@keyframes lugiaFloat {
+  0%, 100% { transform: translateY(70%) translateY(0px) rotate(-1deg); }
+  50%       { transform: translateY(70%) translateY(18px) rotate(1.5deg); }
+}
+
+@keyframes lugiaFloatMobile {
+  0%, 100% { transform: translateY(45%) translateY(0px) rotate(-1deg); }
+  50%       { transform: translateY(45%) translateY(10px) rotate(1.5deg); }
+}
+
+@keyframes lugiaFloatTablet {
+  0%, 100% { transform: translateY(25%) translateY(0px) rotate(-1deg); }
+  50%       { transform: translateY(25%) translateY(12px) rotate(1.5deg); }
+}
+
+.lugia-float {
+  animation: lugiaFloatMobile 7s ease-in-out infinite;
+}
+
+/* tablet: 768–1023px */
+@media (min-width: 768px) {
+  .lugia-float {
+    animation: lugiaFloatTablet 7s ease-in-out infinite;
+  }
+}
+
+/* desktop: 1024px+ */
+@media (min-width: 1024px) {
+  .lugia-float {
+    animation: lugiaFloat 7s ease-in-out infinite;
+  }
+}
+
+.lugia-img {
+  width: min(280px, 72vw);
+}
+
+
+.lugia-line-offset {
+  transform: translateY(calc(min(280px, 72vw) * 0.8333));
+}
+
+@media (min-width: 768px) {
+  .lugia-line-offset {
+    transform: translateY(calc(min(320px, 42vw) * 0.8333));
+  }
+}
+
+@media (min-width: 1024px) {
+  .lugia-line-offset {
+    transform: translateY(calc(min(420px, 33vw) * 0.8333));
+  }
+}
+
+@media (min-width: 768px) {
+  .lugia-img {
+    width: min(320px, 42vw);
+  }
+}
+
+@media (min-width: 1024px) {
+  .lugia-img {
+    width: min(420px, 33vw);
+  }
+}
+
