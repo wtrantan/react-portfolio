@@ -154,10 +154,10 @@ export default function Home() {
     { name: 'Godot',      icon: 'https://godotengine.org/assets/press/icon_color.png' },
     { name: 'FastAPI',    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg' },
     { name: 'Socket.IO',  icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/socketio/socketio-original.svg', needsInvert: true },
-    { name: 'AWS Bedrock', icon: '/skills/bedrock.svg' },
+    { name: 'AWS Bedrock', icon: '/skills/Bedrock.svg' },
     { name: 'AWS S3',     icon: 'https://user-images.githubusercontent.com/15157491/75435753-6929fc80-594b-11ea-9e19-f78223916862.png' },
     { name: 'Puppeteer',  icon: 'https://www.svgrepo.com/show/354228/puppeteer.svg' },
-    { name: 'Cheerio',    icon: 'https://cheerio.js.org/_astro/orange-c.LpIsIfBH_Z1HYzg2.svg' }, 
+    { name: 'Cheerio',    icon: '/skills/cheerio.svg' }, 
     { name: 'Drei',       icon: 'https://pmndrs.gallerycdn.vsassets.io/extensions/pmndrs/pmndrs/0.3.7/1676328524141/Microsoft.VisualStudio.Services.Icons.Default'}, 
     ],
   },
@@ -282,7 +282,7 @@ export default function Home() {
   const projects = [
     {
       title: 'Portfolio Website',
-      description: 'Personal portfolio built with Next.js, React, and Tailwind CSS featuring animated UI and smooth scroll navigation.',
+      description: 'Personal portfolio built with Next.js, React, and Tailwind CSS. Implemented native Canvas API particles that react to user touch and mouse movements, creating an immersive underwater Pokémon theme. The entire experience is fully responsive, ensuring the same playful, animated UI works perfectly on mobile devices as it does on desktop.',
       tags: ['React', 'Next.js', 'Tailwind'],
       color: 'from-sky-400 to-cyan-500',
       tagColor: 'from-sky-800 to-cyan-900',
@@ -456,9 +456,9 @@ export default function Home() {
         <div className="relative z-10 text-center w-full max-w-3xl mx-auto px-4">
           {/* Avatar */}
           <div className="relative inline-block mb-8">
-            <div className="w-28 h-28 sm:w-36 sm:h-36 md:w-44 md:h-44 rounded-full mx-auto overflow-hidden ring-4 ring-sky-300/40 shadow-2xl shadow-sky-300/20"
+            <div className="w-28 h-28 sm:w-36 sm:h-36 md:w-44 md:h-44 rounded-full mx-auto overflow-hidden ring-4 ring-sky-300/40 shadow-2xl shadow-sky-300/20" 
               style={{ background: 'linear-gradient(135deg, #7dd3fc, #5eead4)' }}>
-              <img src="/pfp.png" alt="William Trantan" className="w-full h-full object-cover" />
+              <img src="/pfp.png" alt="William Trantan" className="w-full h-full object-cover " />
             </div>
             <span className="absolute bottom-1 right-1 w-3.5 h-3.5 sm:w-4 sm:h-4 bg-teal-300 rounded-full border-2 border-[#061923] shadow-lg shadow-teal-300/40" />
           </div>
@@ -475,8 +475,9 @@ export default function Home() {
           </h1>
 
           <p className="font-['DM_Sans'] font-light text-gray-400 text-sm sm:text-base md:text-lg max-w-sm sm:max-w-md mx-auto mb-7 sm:mb-8 leading-relaxed">
+            Passionate about coding, hockey, and bridging the gaps between imagination and reality.
             Simply someone building cool digital experiences.
-            Passionate about code, hockey, and everything in between.
+           
           </p>
             
           {/* Social links */}
@@ -594,7 +595,7 @@ export default function Home() {
               </p>
               <p className="font-['DM_Sans'] font-light text-gray-400 text-sm sm:text-base leading-relaxed mb-7 sm:mb-8">
                 Outside of engineering, I spend time ice skating, watching hockey,
-                going hiking, swimming or playing video games. I Make sure to keep myself active and healthy while away from the computer.
+                going hiking, swimming or playing video games. I make sure to keep myself active and healthy while away from the computer.
               </p>
               <div className="flex flex-wrap gap-2"></div>
             </div>
