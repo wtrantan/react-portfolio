@@ -415,9 +415,9 @@ export default function Home() {
           {/* CTA buttons */}
           <div className="flex justify-center gap-3 flex-wrap">
             <Link to="projects" spy smooth offset={-72} duration={700}
-              className="cursor-pointer inline-flex items-center gap-2 px-6 sm:px-8 py-3 rounded-full font-['Archivo_Black'] font-bold text-xs sm:text-sm tracking-wide
-                bg-sky-500 hover:bg-sky-400 text-[#04202d] transition-all duration-200 hover:scale-105 shadow-lg shadow-sky-400/25">
-              View Projects ↓
+              className="inline-flex items-center gap-2 px-6 sm:px-8 py-3 rounded-full font-['Archivo_Black'] font-bold text-xs sm:text-sm tracking-wide
+                border border-sky-300/40 text-sky-200 hover:bg-sky-950/40 hover:border-sky-200 transition-all duration-200 hover:scale-105">
+                  Projects ↓
             </Link>
             <a href="/resume.pdf" target="_blank"
               className="inline-flex items-center gap-2 px-6 sm:px-8 py-3 rounded-full font-['Archivo_Black'] font-bold text-xs sm:text-sm tracking-wide
@@ -640,8 +640,9 @@ export default function Home() {
                 <p className="font-['DM_Sans'] text-gray-500 text-sm">More projects, contributions, and experiments</p>
               </div>
               <a href="https://github.com/wtrantan" target="_blank" rel="noreferrer"
-                className="inline-flex items-center gap-2 px-6 sm:px-8 py-3 rounded-full font-['Archivo_Black'] font-bold text-sm bg-sky-500 hover:bg-sky-400 text-[#04202d] transition-all duration-200 hover:scale-105 shadow-lg shadow-sky-400/25">
-                View GitHub ↗
+                className="inline-flex items-center gap-2 px-6 sm:px-8 py-3 rounded-full font-['Archivo_Black'] font-bold text-xs sm:text-sm tracking-wide
+                border border-sky-300/40 text-sky-200 hover:bg-sky-950/40 hover:border-sky-200 transition-all duration-200 hover:scale-105">
+                GitHub ↗
               </a>
             </div>
           </div>
