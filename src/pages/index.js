@@ -308,6 +308,15 @@ export default function Home() {
       link: 'https://cse108-project-shooter-game.onrender.com/',
     },
     {
+      title: 'Ultrasonic Sensor Detection',
+      description: 'Designed and built an Arduino-based system using an HC-SR04 ultrasonic sensor to detect and count individuals passing through an entrance; displayed results in real-time on an LCD.',
+      tags: ['C++', 'Arduino', 'Circuits'],
+      color: 'from-sky-400 to-cyan-500',
+      tagColor: 'from-sky-800 to-cyan-900',
+      image: '/projects/circuit.jpg',
+      link: 'https://www.youtube.com/watch?v=i7fmPf5KST4',
+    },
+    {
       title: 'KarinaSys',
       description: 'An introductory exploration of 3D web development with Three.js, demonstrating the fundamentals of manipulating geometries, lighting, and camera perspectives within a digital space.',
       tags: ['Three.js'],
@@ -332,7 +341,7 @@ export default function Home() {
       color: 'from-sky-400 to-cyan-500',
       tagColor: 'from-sky-800 to-cyan-900',
       image: '/projects/profit.jpg',
-      link: 'https://github.com/wtrantan/HackDavis',
+      link: 'https://github.com/Pyroniam/Hackathon_2025',
     },
   ];
 
