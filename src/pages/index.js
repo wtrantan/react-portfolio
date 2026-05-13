@@ -220,7 +220,7 @@ const skills = [
       ],
     },
   ];
-
+  
   const projects = [
     {
       title: 'Portfolio Website',
@@ -640,7 +640,7 @@ const skills = [
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-10 sm:mb-12">
             {projects.map((p, i) => (
               <a key={i} href={p.link} target="_blank" rel="noreferrer"
-                className="group relative rounded-2xl overflow-hidden border border-white/5 hover:border-sky-300/30 bg-white/[0.03] transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-sky-950/25 cursor-pointer flex flex-col">
+                className="group relative rounded-2xl overflow-hidden border border-white/5 hover:border-sky-300/30 bg-white/[0.03] cursor-pointer flex flex-col">
 
                 <div className="relative w-full h-44 sm:h-48 overflow-hidden">
                   <div className={`absolute inset-0 bg-gradient-to-br ${p.color} opacity-20 z-10`} />
@@ -649,7 +649,7 @@ const skills = [
                     alt={p.title}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
-                  <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-[#082433] to-transparent z-20" />
+                  <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-[#082433] to-transparent z-20" />
                 </div>
 
                 <div className="flex-col flex-1 p-5 sm:p-6">
